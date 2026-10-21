@@ -154,11 +154,10 @@ p{margin:0}
 .construct{flex:1 1 340px;max-width:520px;min-width:0;aspect-ratio:1;position:relative}
 .construct svg{width:100%;height:100%;overflow:visible}
 .construct .g{stroke:var(--lav);stroke-width:.5;fill:none;stroke-dasharray:2 3;opacity:.5}
-.construct .lab{font-family:var(--f-mono);font-size:4.2px;fill:var(--muted);letter-spacing:.08em}
+.construct .lab{font-family:var(--f-mono);font-size:4.4px;fill:var(--fg);letter-spacing:.1em}
+.construct .ld polyline{stroke:var(--lav);stroke-width:.4;fill:none;opacity:.7}
+.construct .ld circle{fill:var(--white)}
 .construct .ring{transform-origin:190px 44px;transition:transform 1.2s var(--ease)}
-.construct:hover .r1{transform:translateY(10px) scale(1.02)}
-.construct:hover .r2{transform:translateY(6px)}
-.construct:hover .r3{transform:translateY(3px)}
 .mark-copy{flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:22px;max-width:560px}
 .mark-copy h2{font-size:clamp(38px,5.2vw,74px)}
 .mark-copy p{color:var(--muted)}
@@ -366,9 +365,9 @@ p{margin:0}
   <section class="mark" id="mark" data-state='{"x":0.6,"y":0.4,"ry":0,"rx":0,"spread":0.3,"scale":0.5,"op":0,"rings":0,"mx":0,"my":0.6,"mop":0}'>
     <div class="wrap">
       <div class="mark-hero">
-        <div class="construct rv" aria-label="Construction of the Zerith mark: four circles sharing one tangent at the top">
-          <svg viewBox="118 28 144 144" role="img">
-            <title>Zerith mark construction</title>
+        <div class="construct rv" aria-label="The Zerith mark: four layers, data, knowledge, conversation and clarity, meeting at one point">
+          <svg viewBox="92 30 196 144" role="img">
+            <title>The four layers of the Zerith mark</title>
             <line class="g" x1="120" y1="44" x2="260" y2="44"/>
             <line class="g" x1="190" y1="30" x2="190" y2="170"/>
             <g class="ring r1"><circle cx="190" cy="100" r="56" fill="#5B3FD6"/></g>
@@ -376,15 +375,23 @@ p{margin:0}
             <g class="ring r3"><circle cx="190" cy="68" r="24" fill="#B7A5FF"/></g>
             <circle cx="190" cy="54" r="10" fill="#FFFFFF"/>
             <circle class="g" cx="190" cy="100" r="62"/>
-            <text class="lab" x="232" y="41">SHARED TANGENT</text>
-            <text class="lab" x="122" y="168">R 56 · 40 · 24 · 10</text>
+            <g class="ld">
+              <polyline points="180,54 130,48"/><circle cx="180" cy="54" r=".9"/>
+              <polyline points="175,78 130,80"/><circle cx="175" cy="78" r=".9"/>
+              <polyline points="215,100 252,100"/><circle cx="215" cy="100" r=".9"/>
+              <polyline points="225,132 252,138"/><circle cx="225" cy="132" r=".9"/>
+            </g>
+            <text class="lab" x="128" y="49.5" text-anchor="end">CLARITY</text>
+            <text class="lab" x="128" y="81.5" text-anchor="end">CONVERSATION</text>
+            <text class="lab" x="254" y="101.5">KNOWLEDGE</text>
+            <text class="lab" x="254" y="139.5">DATA</text>
           </svg>
         </div>
         <div class="mark-copy rv">
           <span class="eyebrow">The mark</span>
-          <h2>Four circles, one shared point.</h2>
-          <p>Each ring is smaller than the one beneath it, and every ring touches the same tangent at the top. <strong>Nothing reaches the point alone.</strong> The white dot is the moment of clarity, held up by every layer below it.</p>
-          <p>The radii step down evenly (56, 40, 24, 10) so the mark reads as one form at 16 pixels and as depth at full size. On the web it becomes a 3D object, which is what you have been scrolling past.</p>
+          <h2>Everything leads to one clear answer.</h2>
+          <p>Our logo is four circles that meet at a single point. Each one is a layer of what an organisation knows: its data, its documents, its conversations and its ideas.</p>
+          <p>The white dot where they meet is the answer. <strong>That is what Zerith does: brings every layer together so the answer is easy to see.</strong></p>
         </div>
       </div>
 

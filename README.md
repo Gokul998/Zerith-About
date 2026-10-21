@@ -291,7 +291,7 @@ The page avoids grids and card layouts. It is one continuous night sky with a fi
 | 3 | **Layers intro** | `#layers` | "Four layers. One point of light." Mark returns to front view. |
 | 4–7 | **Layer cards** | — | Four glass cards (Data → Clarity) alternate left and right. Mark turns side-on, spreads into depth, and lights up one ring at a time. |
 | 8 | **Beliefs** | `#beliefs` | Sticky section; vertical scroll moves five principle cards sideways along a curved track. |
-| 9 | **The mark** | `#mark` | Brand guidelines: construction diagram, lockups, copyable swatches, type specimens, do/don't. 3D mark fades out. |
+| 9 | **The mark** | `#mark` | "Everything leads to one clear answer." Labelled layer diagram (Data, Knowledge, Conversation, Clarity), lockups, copyable swatches, type specimens, do/don't. 3D mark fades out. |
 | 10 | **Close** | — | "Coming soon" badge, tagline, giant gradient "Zerith" wordmark, footer. Mark returns, centred. |
 
 Fixed layers (bottom to top): `.sky` (gradient) → `#gl` (WebGL canvas) → `.grain` (film grain) → `.glow` (cursor light) → content → `.nav`.
@@ -374,7 +374,7 @@ Every section that controls the 3D mark has a `data-state` attribute with a JSON
 | 03 Conversation | Left, turned −1.05, third ring lit |
 | 04 Clarity | Right, turned 0.35, spread 0.6, point lit |
 | Beliefs | Small (0.42), top right, 55% opacity |
-| The mark | Hidden (`op 0`) so the 2D construction diagram stands alone |
+| The mark | Hidden (`op 0`) so the 2D layer diagram stands alone |
 | Close | Centred, front view, full opacity |
 
 ---
@@ -428,7 +428,6 @@ Main easing curve: `--ease: cubic-bezier(.2, .7, .1, 1)` (fast start, long soft 
 | Secondary button | Lifts 2px, border turns lavender |
 | Belief card | 3D tilt follows the pointer (±10° X, ±12° Y); spotlight gradient follows the cursor; border brightens |
 | Swatch | Lifts 6px; click copies the hex and shows a "Copied" chip for 1.4s |
-| Construction diagram | Rings slide down 10 / 6 / 3px, showing they are separate layers (1.2s) |
 
 ---
 
@@ -463,7 +462,7 @@ Breakpoint: **760px** (and any viewport narrower than 0.85 aspect ratio for the 
 - `prefers-reduced-motion: reduce` turns off all CSS animations and transitions, stops idle 3D motion, and snaps the 3D mark to each pose instead of easing.
 - Content is readable at rest: reveal effects start at partial opacity, never 0.
 - Visible focus ring: 2px lavender outline with 4px offset.
-- The canvas and decorative SVGs are `aria-hidden`; the construction diagram has a text label.
+- The canvas and decorative SVGs are `aria-hidden`; the layer diagram has a text label.
 - Text contrast meets WCAG AA (see §5).
 
 ---
