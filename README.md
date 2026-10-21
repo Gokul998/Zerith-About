@@ -61,20 +61,8 @@ The page is a single static file with no build step.
 - **External dependencies** (both pinned):
   - Three.js `0.149.0` — `https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js`
   - Google Fonts — Poppins (400/500/600), Figtree (400/500/600), JetBrains Mono (400/500)
-- **Note:** `index.html` is written in the Claude Artifact format (no `<!doctype>`, `<html>`, `<head>` or `<body>` tags; the Artifact host adds them). To host it elsewhere, such as GitHub Pages or Vercel, wrap it in a standard document shell:
-  ```html
-  <!doctype html>
-  <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  </head>
-  <body>
-    <!-- contents of index.html -->
-  </body>
-  </html>
-  ```
-  Without the viewport meta tag, phones render the page at desktop width.
+- **Hosting:** the site is served by GitHub Pages at **https://zerith.in** from the `main` branch root. `CNAME` holds the custom domain and `.nojekyll` turns off Jekyll processing.
+- **DNS (GoDaddy):** four `A` records on `@` pointing to `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`, and a `CNAME` record `www` → `gokul998.github.io`.
 
 ---
 
