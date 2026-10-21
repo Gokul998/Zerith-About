@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Zerith reveal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=JetBrains+Mono:wght@500&display=block">
+<style>
+  html,body{margin:0;background:#07070F;overflow:hidden}
+  #stage{position:relative;overflow:hidden;font-family:"Poppins",sans-serif;color:#F3F1FF;
+    background:
+      radial-gradient(60% 55% at 50% 42%,rgba(91,63,214,.24),transparent 70%),
+      radial-gradient(45% 40% at 8% 95%,rgba(124,92,240,.10),transparent 70%),
+      #07070F}
+  #stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 50%,transparent 55%,rgba(0,0,0,.55))}
+  canvas{position:absolute;inset:0;width:100%;height:100%}
+  .cap{position:absolute;left:0;right:0;text-align:center;font-weight:500;letter-spacing:-.02em;white-space:nowrap}
+  .cap span{display:inline-block}
+  #lock{position:absolute;display:flex;flex-direction:column}
+  .mask{overflow:hidden;padding-bottom:.06em}
+  #wm{font-weight:500;letter-spacing:-.02em;line-height:1;color:#fff}
+  #tag{font-weight:500;color:#A78BFA;letter-spacing:-.005em}
+  #soon{align-self:flex-start;display:inline-flex;align-items:center;gap:.6em;font-family:"JetBrains Mono",monospace;font-weight:500;
+    text-transform:uppercase;letter-spacing:.18em;color:#fff;border:1px solid rgba(183,165,255,.45);border-radius:999px;
+    background:linear-gradient(90deg,rgba(124,92,240,.38),rgba(91,63,214,.12));box-shadow:0 0 40px rgba(124,92,240,.28)}
+  #soon i{width:.6em;height:.6em;border-radius:50%;background:#fff;box-shadow:0 0 12px #B7A5FF}
+  .sq #lock{align-items:center;text-align:center}
+  .sq #soon{align-self:center}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="c"></canvas>
+  <div class="cap" id="cap1"><span>Data.</span> <span>Knowledge.</span> <span>Conversation.</span></div>
+  <div class="cap" id="cap2">One point of clarity.</div>
+  <div id="lock">
+    <div class="mask"><div id="wm">Zerith</div></div>
+    <div id="tag">Where clarity meets possibility</div>
+    <div id="soon"><i></i>Coming soon · zerith.in</div>
+  </div>
+</div>
+<script src="../node_modules/three/build/three.min.js"></script>
+<script src="scene.js"></script>
+<script>
+const P = new URLSearchParams(location.search);
+const W = +P.get('w') || 1920, H = +P.get('h') || 1080, DPR = +P.get('dpr') || 1;
+const SQ = W / H < 1.3;
+const DURATION = 12;
+const stage = document.getElementById('stage');
+stage.style.width = W + 'px'; stage.style.height = H + 'px';
+if (SQ) stage.classList.add('sq');
+const S = ZerithScene(document.getElementById('c'), W, H, { dpr: DPR, dust: SQ ? 1300 : 1600 });
+
+const $ = id => document.getElementById(id);
+const cap1 = $('cap1'), cap2 = $('cap2'), words = [...cap1.children], lock = $('lock'), wm = $('wm'), tag = $('tag'), soon = $('soon');
+
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const seg = (t, a, b) => clamp((t - a) / (b - a));
+const lerp = (a, b, k) => a + (b - a) * k;
+const eOut = k => 1 - Math.pow(1 - k, 3);
+const eIO = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+const eBack = k => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(k - 1, 3) + c1 * Math.pow(k - 1, 2); };
+const bump = (t, a, b, f = .25) => seg(t, a, a + f) - seg(t, b - f, b);
+
+// Layout (CSS px)
+const m = Math.min(W, H);
+const start = { cx: W / 2, cy: SQ ? H * .44 : H * .44, r: m * (SQ ? .2 : .2) };
+const fin = SQ ? { cx: W / 2, cy: H * .34, r: m * .16 } : { cx: W * .36, cy: H * .47, r: H * .165 };
+
+wm.style.fontSize = (SQ ? m * .15 : H * .155) + 'px';
+tag.style.fontSize = (SQ ? m * .036 : H * .037) + 'px';
+tag.style.marginTop = (m * .012) + 'px';
+soon.style.fontSize = (m * .018) + 'px';
+soon.style.padding = `${m * .011}px ${m * .02}px ${m * .011}px ${m * .015}px`;
+soon.style.marginTop = (m * .04) + 'px';
+[cap1, cap2].forEach(c => { c.style.fontSize = (m * .052) + 'px'; c.style.top = (SQ ? H * .74 : H * .78) + 'px'; });
+
+function placeLock() {
+  if (SQ) { lock.style.left = '0'; lock.style.right = '0'; lock.style.top = (fin.cy + fin.r + m * .07) + 'px'; }
+  else {
+    lock.style.left = (fin.cx + fin.r + H * .07) + 'px';
+    lock.style.top = (fin.cy - lock.offsetHeight / 2) + 'px';
+  }
+}
+
+window.frame = function (t) {
+  // growth: the point appears first, then each ring grows down from the shared tangent
+  const grow = [
+    eOut(seg(t, 2.5, 3.4)),
+    eOut(seg(t, 1.9, 2.8)),
+    eOut(seg(t, 1.3, 2.2)),
+    eBack(seg(t, .4, 1.2))
+  ];
+  // camera: starts side-on so the layers read as depth, turns to the flat logo
+  const turn = eIO(seg(t, 1.0, 6.4));
+  const sway = .08 * seg(t, 6.4, 7.6);
+  const ry = lerp(-1.0, 0, turn) + Math.sin((t - 6.4) * .55) * sway;
+  const rx = lerp(.35, 0, turn) + Math.sin((t - 6.4) * .4) * sway * .4;
+  // layers open into depth as they grow, then close back to the flat logo
+  const spread = lerp(0, 1.5, eIO(seg(t, 1.2, 2.8))) - (1.5 - .12) * eIO(seg(t, 3.6, 6.4));
+  // the opening frames centre on the point (it sits 0.82·r above the mark's centre)
+  const lift = .82 * (1 - eIO(seg(t, 1.2, 3.4)));
+
+  // emphasis follows the captions
+  const base = 1 - .65 * (seg(t, 3.6, 3.9) - seg(t, 6.3, 6.7));
+  const hi = [bump(t, 3.8, 4.6), bump(t, 4.4, 5.2), bump(t, 5.0, 5.8), bump(t, 5.6, 6.6)];
+  const emph = hi.map(h => base + (1 - base) * h);
+
+  const mv = eIO(seg(t, 6.6, 7.8));
+  S.set({
+    t, cx: lerp(start.cx, fin.cx, mv), cy: lerp(start.cy, fin.cy, mv) + lift * start.r, radius: lerp(start.r, fin.r, mv),
+    rx, ry, spread, grow, emph,
+    halo: seg(t, .4, 2.2), rings: eOut(seg(t, 6.8, 8.4)), dust: .8 * seg(t, 0, 1.2), dustRot: t * .01
+  });
+  S.render();
+
+  // captions
+  const outA = 1 - seg(t, 5.55, 5.85);
+  [3.8, 4.4, 5.0].forEach((a, i) => {
+    const k = eOut(seg(t, a, a + .45));
+    words[i].style.opacity = k * outA;
+    words[i].style.transform = `translateY(${(1 - k) * 0.4}em)`;
+    words[i].style.color = (t > a && t < a + .65) ? '#B7A5FF' : '#F3F1FF';
+  });
+  const k2 = eOut(seg(t, 5.8, 6.25));
+  cap2.style.opacity = k2 * (1 - seg(t, 6.5, 6.8));
+  cap2.style.transform = `translateY(${(1 - k2) * .4}em)`;
+
+  // lockup
+  const kw = eOut(seg(t, 7.0, 7.9));
+  wm.style.transform = `translateY(${(1 - kw) * 110}%)`;
+  const kt = eOut(seg(t, 7.7, 8.4));
+  tag.style.opacity = kt; tag.style.transform = `translateY(${(1 - kt) * .6}em)`;
+  const ks = eOut(seg(t, 8.8, 9.5));
+  soon.style.opacity = ks; soon.style.transform = `translateY(${(1 - ks) * .8}em)`;
+};
+
+window.ready = document.fonts.ready.then(() => { placeLock(); frame(0); return true; });
+
+if (!P.has('render')) {
+  window.ready.then(() => {
+    const t0 = performance.now();
+    (function loop(now) { frame(((now - t0) / 1000) % (DURATION + 1)); requestAnimationFrame(loop); })(t0);
+  });
+}
+</script>
+</body>
+</html>

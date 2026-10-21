@@ -246,7 +246,7 @@ Fallback stacks: `ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-seri
 |---|---|---|---|
 | Hero H1 | `clamp(46px, 8.4vw, 118px)` | 1.02 | −0.035em |
 | Section H2 | `clamp(38px, 6vw, 88px)` | 1.02 | −0.035em |
-| Statement | `clamp(30px, 4.4vw, 64px)` | 1.12 | −0.03em |
+| Why Zerith headline | `clamp(40px, 5.4vw, 80px)` | 1.02 | −0.035em |
 | Card H3 | `clamp(30px, 3.4vw, 46px)` | 1.02 | −0.035em |
 | Lead | `clamp(17px, 1.5vw, 20px)` | 1.6 | 0 |
 | Body | 17px (16px mobile) | 1.6 | 0 |
@@ -275,7 +275,7 @@ The page avoids grids and card layouts. It is one continuous night sky with a fi
 | # | Section | ID | What happens |
 |---|---|---|---|
 | 1 | **Hero** | `#top` | "Coming soon" badge, H1 "Where clarity meets possibility.", lead, two buttons. 3D mark floats on the right. |
-| 2 | **Statement** | `#story` | Large paragraph lights up word by word as you scroll. Mark moves left and tilts. |
+| 2 | **Why Zerith** | `#story` | Headline "Most knowledge at work is buried.", a supporting line, and an accent line with the key phrase in lavender. Text on the left; mark moves right and tilts. |
 | 3 | **Layers intro** | `#layers` | "Four layers. One point of light." Mark returns to front view. |
 | 4–7 | **Layer cards** | — | Four glass cards (Data → Clarity) alternate left and right. Mark turns side-on, spreads into depth, and lights up one ring at a time. |
 | 8 | **Beliefs** | `#beliefs` | Sticky section; vertical scroll moves five principle cards sideways along a curved track. |
@@ -355,7 +355,7 @@ Every section that controls the 3D mark has a `data-state` attribute with a JSON
 | Section | Pose summary |
 |---|---|
 | Hero | Right side, front view, nearly flat (`spread 0.15`), large |
-| Statement | Left, turned −0.55, spread 0.9, slightly faded |
+| Why Zerith | Right, turned +0.55, spread 0.9, slightly faded |
 | Layers intro | Right, front view, flat |
 | 01 Data | Left, turned −1.05, exploded (1.7), outer ring lit |
 | 02 Knowledge | Right, turned +1.05, second ring lit |
@@ -399,7 +399,6 @@ Main easing curve: `--ease: cubic-bezier(.2, .7, .1, 1)` (fast start, long soft 
 | Element | Behaviour |
 |---|---|
 | 3D mark pose | Blends between `data-state` anchors (§10) |
-| Statement words | Each word goes from dim `#5E5885` to white when it passes 66% of viewport height (0.5s colour transition). Highlighted phrases turn lavender with a glow. |
 | Reveal blocks `.rv` | translateY 28px→0, opacity 0.55→1, 1.1s, when 18% visible (IntersectionObserver, runs once) |
 | Layer cards `.card` | translateY 40px + scale 0.97 → none, opacity 0.35→1, 1s |
 | Beliefs track | Vertical scroll → horizontal `translate3d`. Section height = viewport + track overflow. |
@@ -463,11 +462,35 @@ Breakpoint: **760px** (and any viewport narrower than 0.85 aspect ratio for the 
 | Move or turn the 3D mark in a section | Edit that section's `data-state` JSON (§10) |
 | Light a different ring | Set `"focus": 0–3` in the section's `data-state` |
 | Add a section that controls the mark | Give the new element a `data-state` attribute; it is picked up automatically in DOM order |
-| Change the statement text | Edit `<p id="words">`; wrap phrases in `<span class="hl">` to highlight them |
+| Change the "Why Zerith" text | Edit the `.st` block in `#story`; wrap a phrase in `<em>` to highlight it in lavender |
 | Add a principle card | Copy an `<article class="belief">` inside `#track` |
 | Remove "Coming soon" | Delete the two `<span class="soon">` elements |
 | Change animation speed | Edit durations in the keyframe rules, or the lerp factors `0.075` / `0.09` in `frame()` |
 | Make the 3D mark flatter or deeper | Change the `Z` array `[0, .62, 1.12, 1.5]` in the script |
+
+---
+
+## 16. Media kit (video + LinkedIn)
+
+Sources live in `media/src/` and reuse the website's 3D mark (`scene.js`). Finished files are in `media/out/`.
+
+| File | Use |
+|---|---|
+| `zerith-reveal-1920x1080.mp4` | 12s brand reveal, 16:9 (website, YouTube, LinkedIn) |
+| `zerith-reveal-1080x1080.mp4` | Same reveal, square (LinkedIn / Instagram feed) |
+| `linkedin-personal-cover-1584x396.png` (+ `@2x`) | Personal profile banner; content sits centre-right to clear the profile photo |
+| `linkedin-company-cover-1128x191.png` (+ `@2x`) | Company page cover |
+| `linkedin-logo-400x400.png`, `linkedin-logo-1200x1200.png` | Profile / company logo; mark sized to survive the circular crop |
+
+**Video storyboard (12s, 30fps):** 0.4s the white point appears → 1.3–3.4s the lavender, violet and deep-violet rings grow down from the shared top point, seen side-on → 3.8–6.6s captions "Data. Knowledge. Conversation." then "One point of clarity." while each ring lights up in turn → 3.6–6.4s the camera turns to the flat logo → 6.6–7.8s the mark slides left (up, in square) → 7.0–8.4s "Zerith" rises in with the tagline → 8.8s "Coming soon · zerith.in" → hold.
+
+**Re-render:** edit timings in `media/src/video.html` (`frame(t)`), layouts in `media/src/social.html`, then:
+
+```bash
+cd media && npm install && npm run render
+```
+
+Requires Google Chrome installed. `node render.mjs stills` or `node render.mjs video` renders one group. Open `media/src/video.html` in a browser to preview the animation live.
 
 ---
 

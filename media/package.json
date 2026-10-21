@@ -1,0 +1,11 @@
+{
+  "name": "zerith-media",
+  "private": true,
+  "type": "module",
+  "scripts": { "render": "node render.mjs" },
+  "dependencies": {
+    "ffmpeg-static": "5.2.0",
+    "puppeteer-core": "23.11.1",
+    "three": "0.149.0"
+  }
+}

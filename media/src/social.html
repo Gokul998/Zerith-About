@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Zerith social</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=JetBrains+Mono:wght@500&display=block">
+<style>
+  html,body{margin:0;background:#07070F;overflow:hidden}
+  #stage{position:relative;overflow:hidden;font-family:"Poppins",sans-serif;color:#fff;background:#07070F}
+  canvas{position:absolute;inset:0;width:100%;height:100%}
+  #lock{position:absolute;display:flex;flex-direction:column}
+  #wm{font-weight:500;letter-spacing:-.02em;line-height:1}
+  #tag{font-weight:500;color:#A78BFA}
+  #soon{align-self:flex-start;display:inline-flex;align-items:center;gap:.6em;font-family:"JetBrains Mono",monospace;font-weight:500;
+    text-transform:uppercase;letter-spacing:.18em;border:1px solid rgba(183,165,255,.45);border-radius:999px;
+    background:linear-gradient(90deg,rgba(124,92,240,.38),rgba(91,63,214,.12));box-shadow:0 0 30px rgba(124,92,240,.28)}
+  #soon i{width:.6em;height:.6em;border-radius:50%;background:#fff;box-shadow:0 0 10px #B7A5FF}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="c"></canvas>
+  <div id="lock">
+    <div id="wm">Zerith</div>
+    <div id="tag">Where clarity meets possibility</div>
+    <div id="soon"><i></i>Coming soon · zerith.in</div>
+  </div>
+</div>
+<script src="../node_modules/three/build/three.min.js"></script>
+<script src="scene.js"></script>
+<script>
+const P = new URLSearchParams(location.search);
+const type = P.get('type') || 'personal';
+const DPR = +P.get('dpr') || 1;
+const SIZES = { personal: [1584, 396], company: [1128, 191], logo: [+P.get('s') || 400, +P.get('s') || 400] };
+const [W, H] = SIZES[type];
+const stage = document.getElementById('stage'), lock = document.getElementById('lock');
+const wm = document.getElementById('wm'), tag = document.getElementById('tag'), soon = document.getElementById('soon');
+stage.style.width = W + 'px'; stage.style.height = H + 'px';
+
+let bg, mark, fonts;
+if (type === 'personal') {
+  // LinkedIn's profile photo covers the lower-left on desktop, so the content sits centre-right.
+  bg = 'radial-gradient(40% 90% at 80% 50%,rgba(91,63,214,.32),transparent 70%),radial-gradient(30% 80% at 30% 100%,rgba(124,92,240,.12),transparent 70%),#07070F';
+  mark = { cx: 1290, cy: 198, radius: 138, ry: -.42, rx: .14, spread: .75, t: 4.2 };
+  fonts = { wm: 92, tag: 25, soon: 13, x: 560, gapTag: 10, gapSoon: 26 };
+} else if (type === 'company') {
+  bg = 'radial-gradient(35% 120% at 82% 50%,rgba(91,63,214,.34),transparent 70%),#07070F';
+  mark = { cx: 930, cy: 96, radius: 66, ry: -.42, rx: .14, spread: .75, t: 4.2 };
+  fonts = { wm: 54, tag: 15, soon: 0, x: 330, gapTag: 6, gapSoon: 0 };
+} else {
+  bg = 'radial-gradient(55% 55% at 50% 48%,rgba(91,63,214,.38),transparent 72%),#0B0B1A';
+  // radius 0.27·size keeps the whole mark inside LinkedIn's circular crop
+  mark = { cx: W / 2, cy: H / 2, radius: W * .27, ry: -.12, rx: .06, spread: .18, t: 2.1 };
+  fonts = null;
+}
+stage.style.background = bg;
+
+if (fonts) {
+  wm.style.fontSize = fonts.wm + 'px';
+  tag.style.fontSize = fonts.tag + 'px'; tag.style.marginTop = fonts.gapTag + 'px';
+  if (fonts.soon) { soon.style.fontSize = fonts.soon + 'px'; soon.style.marginTop = fonts.gapSoon + 'px'; soon.style.padding = '8px 16px 8px 12px'; }
+  else soon.remove();
+} else lock.remove();
+
+const S = ZerithScene(document.getElementById('c'), W, H, {
+  dpr: DPR, dust: type === 'logo' ? 500 : 1400, dustSize: type === 'logo' ? .05 : (type === 'company' ? .05 : .07), seed: 11
+});
+S.set(Object.assign({ rings: type === 'logo' ? .7 : 1, sat: type === 'logo' ? 0 : 1, dust: type === 'logo' ? .5 : .75 }, mark));
+window.ready = document.fonts.ready.then(() => {
+  if (fonts) { lock.style.left = fonts.x + 'px'; lock.style.top = (H - lock.offsetHeight) / 2 + 'px'; }
+  S.render(); return true;
+});
+</script>
+</body>
+</html>
