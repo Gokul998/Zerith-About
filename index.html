@@ -210,6 +210,37 @@ p{margin:0}
 .nl.core-l b{font-weight:600}
 .nl.core-l span{color:var(--lav);font-weight:500}
 
+/* Meet Arko */
+.arko{padding-block:16vh 10vh}
+.arko .wrap{display:flex;flex-direction:column;gap:8vh}
+.ak-head{max-width:760px;display:flex;flex-direction:column;gap:22px}
+.ak-head h2{font-size:clamp(40px,5.4vw,82px)}
+.ak-head h2 em{font-style:normal;background:linear-gradient(100deg,var(--lav) 10%,var(--violet) 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ak-head p{color:var(--muted);font-size:clamp(17px,1.5vw,21px);max-width:36em}
+.ak-film{margin:0;display:flex;flex-direction:column;gap:14px;position:relative}
+.ak-film::before{content:"";position:absolute;inset:-6% -4%;background:radial-gradient(50% 50% at 50% 50%,rgba(124,92,240,.28),transparent 70%);z-index:-1;pointer-events:none}
+.ak-film video{display:block;width:100%;max-width:100%;aspect-ratio:16/9;border-radius:24px;border:1px solid rgba(183,165,255,.28);background:var(--navy);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.ak-film figcaption{font-size:14px;color:var(--muted)}
+.ak-film figcaption span{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--lav);margin-right:10px}
+.ak-body{display:flex;flex-wrap:wrap;gap:6vw;align-items:flex-start}
+.ak-name{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:18px}
+.ak-name .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--lav)}
+.ak-name .big{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,2.6vw,38px);line-height:1.15;letter-spacing:-.02em;color:var(--fg)}
+.ak-name .big em{color:var(--lav);font-style:italic}
+.ak-name p{color:var(--muted)}
+.ak-name dl{margin:8px 0 0;display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.ak-name dl div{display:flex;gap:18px;padding-block:14px;border-bottom:1px solid var(--line)}
+.ak-name dt{flex:0 0 110px;font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);padding-top:4px}
+.ak-name dd{margin:0;color:var(--fg)}
+.ak-name dd b{color:var(--lav);font-weight:600}
+.ak-traits{flex:1.3 1 420px;min-width:0;list-style:none;margin:0;padding:0;counter-reset:t;display:flex;flex-direction:column}
+.ak-traits li{display:flex;flex-direction:column;gap:4px;padding:18px 0 18px 56px;border-top:1px solid var(--line);position:relative;counter-increment:t}
+.ak-traits li:last-child{border-bottom:1px solid var(--line)}
+.ak-traits li::before{content:"";position:absolute;left:8px;top:24px;width:16px;height:16px;border-radius:50%;
+  background:radial-gradient(circle at 50% 30%,#fff 0 22%,var(--lav) 23% 45%,var(--violet) 46% 70%,var(--deep) 71%);box-shadow:0 0 16px rgba(124,92,240,.5)}
+.ak-traits h3{font-size:clamp(19px,1.6vw,22px);letter-spacing:-.01em}
+.ak-traits p{color:var(--muted);font-size:16px}
+
 /* Mark / brand */
 .mark{padding-block:18vh 12vh;position:relative}
 .mark .wrap{display:flex;flex-direction:column;gap:9vh}
@@ -301,6 +332,7 @@ p{margin:0}
   .card{padding:26px;background:rgba(11,11,26,.78)}
   .statement{padding-block:14vh}
   .st{max-width:none}
+  .ak-name dt{flex-basis:90px}
   .core{min-height:0;display:block;padding-block:12vh 0}
   .cz{max-width:none}
   .core-space{display:block;height:78vh}
@@ -347,7 +379,8 @@ p{margin:0}
 <header class="nav" id="nav">
   <a class="brand" href="#top" aria-label="Zerith, back to top"><svg aria-hidden="true"><use href="#mk"/></svg>Zerith</a>
   <a class="l" href="#story">Why Zerith</a>
-  <a class="l keep" href="#core">Zerith Core</a>
+  <a class="l" href="#core">Zerith Core</a>
+  <a class="l keep" href="#arko">Arko</a>
   <a class="l" href="#layers">What we do</a>
   <a class="l" href="#vision">Vision</a>
   <span class="bar" id="bar"></span>
@@ -399,6 +432,42 @@ p{margin:0}
         </ul>
       </div>
       <div class="core-space" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="arko" id="arko" data-state='{"x":0.62,"y":0.3,"ry":-0.3,"rx":0.1,"spread":0.35,"scale":0.75,"op":1,"rings":0.8,"mx":0.55,"my":0.75,"mop":0.25,"mscale":0.3}'>
+    <div class="wrap">
+      <div class="ak-head rv">
+        <span class="eyebrow">Meet Arko</span>
+        <h2>Say "Hey Arko". <em>Consider it done.</em></h2>
+        <p>Arko is Zerith's voice assistant. It knows your money, plans, files and chats, works across every service at once, and asks before it spends a rupee.</p>
+      </div>
+
+      <figure class="ak-film rv">
+        <video id="akVideo" src="media/out/arko-vision-1920x1080.mp4" poster="media/out/arko-vision-poster.jpg" muted loop playsinline controls preload="metadata" aria-label="Concept film: Arko plans a weekend trip to Pondicherry from one sentence"></video>
+        <figcaption><span>Concept film</span> One sentence to Arko plans, books and budgets a weekend trip, then Arko goes quiet. 26 seconds, no sound.</figcaption>
+      </figure>
+
+      <div class="ak-body" data-state='{"x":0.7,"y":0.2,"ry":0,"rx":0,"spread":0.2,"scale":0.4,"op":0,"rings":0,"mx":0,"my":0.6,"mop":0}'>
+        <div class="ak-name rv">
+          <span class="k">The name</span>
+          <p class="big">Arko comes from the Sanskrit <em>arka</em>, the sun.</p>
+          <p>Like the reactor at the heart of a superhero's suit, Arko is the power source at the centre of Zerith: every service draws on it, and it lights up everything around it.</p>
+          <dl>
+            <div><dt>Wake word</dt><dd>"Hey Arko"</dd></div>
+            <div><dt>Stands for</dt><dd><b>A</b>daptive <b>R</b>easoning and <b>K</b>nowledge <b>O</b>perator</dd></div>
+            <div><dt>Its face</dt><dd>The white point in our logo. It glows when Arko listens.</dd></div>
+          </dl>
+        </div>
+        <ol class="ak-traits rv">
+          <li><h3>Knows your world</h3><p>Sees your money, plans, files and chats together, so its answers join up.</p></li>
+          <li><h3>Acts, not just answers</h3><p>Books, pays, files and reminds across every service, from one request.</p></li>
+          <li><h3>Speaks first, rarely</h3><p>A two-minute morning brief and the odd heads-up. Then silence.</p></li>
+          <li><h3>Asks before it spends</h3><p>Every booking and payment waits for your yes.</p></li>
+          <li><h3>Speaks your language</h3><p>English, Tamil, Hindi and more, including the way you mix them.</p></li>
+          <li><h3>Keeps quiet hours</h3><p>Protects your evenings and weekends from your phone.</p></li>
+        </ol>
+      </div>
     </div>
   </section>
 
@@ -529,7 +598,7 @@ p{margin:0}
       <div class="giant" aria-hidden="true">Zerith</div>
       <footer class="foot">
         <span>© 2026 Zerith</span>
-        <span><a href="#story">Why Zerith</a> · <a href="#core">Zerith Core</a> · <a href="#layers">What we do</a> · <a href="#vision">Vision</a> · <a href="#beliefs">Beliefs</a> · <a href="#top">Back to top ↑</a></span>
+        <span><a href="#story">Why Zerith</a> · <a href="#core">Zerith Core</a> · <a href="#arko">Arko</a> · <a href="#layers">What we do</a> · <a href="#vision">Vision</a> · <a href="#beliefs">Beliefs</a> · <a href="#top">Back to top ↑</a></span>
       </footer>
     </div>
   </section>
@@ -571,6 +640,12 @@ p{margin:0}
     });
     c.addEventListener('pointerleave',()=>{c.dataset.tx=0;c.dataset.ty=0;});
   });
+
+  /* ---------- Arko film ---------- */
+  const akv=document.getElementById('akVideo');
+  if(akv && !reduce && 'IntersectionObserver' in window){
+    new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const p=akv.play(); if(p&&p.catch)p.catch(()=>{}); } else akv.pause(); }),{threshold:.35}).observe(akv);
+  }
 
   /* ---------- pointer ---------- */
   const glow=document.getElementById('glow');

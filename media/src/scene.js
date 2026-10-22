@@ -94,6 +94,36 @@
     }));
     dust.renderOrder = 0; scene.add(dust);
 
+    // Optional Zerith Core network: services orbiting the mark, wired to it (same layout as the website)
+    let netG = null; const nodes = [], cross = [];
+    if (o.net) {
+      netG = new THREE.Group(); scene.add(netG);
+      const haloTex = halo.material.map, dotTex = dust.material.map, NS = o.net.length;
+      const add = (ob, ord) => { ob.renderOrder = ord; netG.add(ob); return ob; };
+      o.net.forEach((col, i) => {
+        const th = i / NS * Math.PI * 2 + .3, hgt = [.45, -.3, .15, -.45, .35, -.1][i % 6];
+        const p = new THREE.Vector3(Math.cos(th) * 4.1, hgt, Math.sin(th) * 4.1);
+        const c = new THREE.Color(col);
+        const mesh = add(new THREE.Mesh(new THREE.SphereGeometry(.12, 24, 16), new THREE.MeshBasicMaterial({ color: c, transparent: true, depthTest: false, depthWrite: false })), 22);
+        mesh.position.copy(p);
+        const glowS = new THREE.Sprite(new THREE.SpriteMaterial({ map: haloTex, color: c, transparent: true, depthTest: false, depthWrite: false, blending: THREE.AdditiveBlending }));
+        glowS.scale.set(1.3, 1.3, 1); mesh.add(glowS);
+        const mid = p.clone().multiplyScalar(.5).add(new THREE.Vector3(0, .55, 0));
+        const curve = new THREE.QuadraticBezierCurve3(p.clone(), mid, new THREE.Vector3(0, 0, 0));
+        const line = add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(48)), new THREE.LineBasicMaterial({ color: 0xB7A5FF, transparent: true, opacity: 0, depthTest: false })), 4);
+        const pulse = add(new THREE.Sprite(new THREE.SpriteMaterial({ map: dotTex, color: 0xffffff, transparent: true, depthTest: false, depthWrite: false, blending: THREE.AdditiveBlending })), 22);
+        pulse.scale.set(.32, .32, 1);
+        nodes.push({ p, mesh, glowS, line, curve, pulse, phase: i * .37 % 1, dir: i % 2 });
+      });
+      (o.links || []).forEach(([a, b]) => {
+        const A = nodes[a].p, B = nodes[b].p, mid = A.clone().add(B).multiplyScalar(.5).multiplyScalar(1.18);
+        const c = new THREE.QuadraticBezierCurve3(A.clone(), mid, B.clone());
+        cross.push(add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(c.getPoints(32)), new THREE.LineBasicMaterial({ color: 0x7C5CF0, transparent: true, opacity: 0, depthTest: false })), 3));
+      });
+      netG.visible = false;
+    }
+    const toScreen = v => { const q = v.clone().project(camera); return { x: (q.x * .5 + .5) * W, y: (-q.y * .5 + .5) * H }; };
+
     function set(s) {
       const t = s.t || 0, op = s.op ?? 1, sp = s.spread ?? 0;
       const g = s.grow || [1, 1, 1, 1], e = s.emph || [1, 1, 1, 1];
@@ -120,8 +150,37 @@
       const a = t * .6; sat.position.set(Math.cos(a) * 1.9, 0, Math.sin(a) * 1.9);
       dust.rotation.y = t * .02 + (s.dustRot || 0);
       dust.material.opacity = (s.dust ?? .75);
-    }
 
-    return { set, render: () => renderer.render(scene, camera) };
+      if (netG) {
+        const nv = Math.min(1, Math.max(0, s.net || 0));
+        netG.visible = nv > .01;
+        const sc = Math.max(s.radius * u / 1.2, 1e-4) * (.35 + .65 * nv);
+        netG.scale.setScalar(sc);
+        netG.rotation.set(s.netTilt ?? .32, s.netRot || 0, 0);
+        scene.updateMatrixWorld(); camera.updateMatrixWorld();
+        const inv = camera.matrixWorldInverse;
+        nodes.forEach((n, i) => {
+          const on = s.active === i, wp = n.p.clone().applyMatrix4(netG.matrixWorld);
+          const behind = wp.clone().applyMatrix4(inv).z < 0;
+          n.behind = behind; n.world = wp;
+          const f = behind ? .5 : 1;
+          n.mesh.renderOrder = n.pulse.renderOrder = behind ? 5 : 22;
+          n.mesh.material.opacity = nv * f;
+          n.glowS.material.opacity = nv * f * (on ? 1 : .5);
+          n.mesh.scale.setScalar(on ? 1.9 : 1);
+          n.line.material.opacity = nv * (on ? .95 : .24);
+          const u2 = (t * (on ? .9 : .32) + n.phase) % 1;
+          n.pulse.position.copy(n.curve.getPoint(n.dir && !on ? u2 : 1 - u2));
+          n.pulse.material.opacity = nv * Math.sin(u2 * Math.PI) * (on ? 1 : .6);
+          n.pulse.scale.setScalar(on ? .5 : .32);
+        });
+        cross.forEach(l => l.material.opacity = nv * .18);
+      }
+    }
+    // screen position (CSS px) of service i, and of a point in the mark's own units
+    function node(i) { const n = nodes[i]; const sp = toScreen(n.world || new THREE.Vector3()); return { x: sp.x, y: sp.y, behind: !!n.behind }; }
+    function point(x, y, z) { root.updateMatrixWorld(); return toScreen(new THREE.Vector3(x, y, z).applyMatrix4(root.matrixWorld)); }
+
+    return { set, node, point, render: () => renderer.render(scene, camera) };
   };
 })();

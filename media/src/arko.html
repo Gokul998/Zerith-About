@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arko concept film</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=block">
+<style>
+  html,body{margin:0;background:#07070F;overflow:hidden}
+  #stage{position:relative;overflow:hidden;width:1920px;height:1080px;font-family:"Figtree",sans-serif;color:#F3F1FF;
+    background:radial-gradient(55% 60% at 40% 48%,rgba(91,63,214,.26),transparent 70%),radial-gradient(40% 40% at 95% 10%,rgba(124,92,240,.10),transparent 70%),#07070F}
+  #stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 50%,transparent 58%,rgba(0,0,0,.5))}
+  canvas{position:absolute;inset:0;width:100%;height:100%}
+  .abs{position:absolute;left:0;top:0;will-change:transform,opacity}
+  .head{left:120px;top:96px;display:flex;flex-direction:column;gap:14px}
+  .head h1{margin:0;font-family:"Poppins",sans-serif;font-weight:500;font-size:68px;letter-spacing:-.03em;line-height:1.02}
+  .head p{margin:0;font-size:28px;color:#A29CC9}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:16px;letter-spacing:.2em;text-transform:uppercase;color:#B7A5FF}
+  .chip{display:inline-flex;align-items:center;gap:10px;padding:9px 16px 9px 12px;border-radius:999px;border:1px solid rgba(183,165,255,.18);
+    background:rgba(11,11,26,.78);font-size:20px;font-weight:500;white-space:nowrap;position:absolute}
+  .chip i{width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c)}
+  .chip b{position:absolute;right:-8px;top:-8px;min-width:22px;height:22px;border-radius:11px;background:#FF5C7A;color:#fff;font:600 13px/22px "Figtree";text-align:center;padding:0 6px}
+  .chip.on{border-color:#B7A5FF;background:rgba(124,92,240,.45)}
+  .card{position:absolute;left:1300px;width:520px;display:flex;align-items:center;gap:18px;padding:18px 22px;border-radius:20px;
+    background:rgba(16,14,40,.82);border:1px solid rgba(183,165,255,.2)}
+  .card .ic{width:14px;height:14px;border-radius:50%;flex:none;background:var(--c);box-shadow:0 0 14px var(--c)}
+  .card .tx{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
+  .card small{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#B7A5FF}
+  .card span{font-size:21px;font-weight:500}
+  .card .amt{font-family:"Poppins",sans-serif;font-weight:500;font-size:22px;color:#fff}
+  .card .ok{width:30px;height:30px;border-radius:50%;flex:none;display:grid;place-items:center;background:#9BE7C4;color:#07070F;font-weight:700;font-size:17px}
+  .bub{position:absolute;max-width:760px;padding:16px 22px;border-radius:22px;font-size:24px;line-height:1.35}
+  .bub.user{background:#F3F1FF;color:#0B0B1A;border-bottom-right-radius:6px}
+  .bub.arko{background:rgba(124,92,240,.32);border:1px solid rgba(183,165,255,.45);border-bottom-left-radius:6px}
+  .bub.arko em{display:block;font-style:normal;font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#B7A5FF;margin-bottom:6px}
+  .status{font-family:"JetBrains Mono",monospace;font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:#B7A5FF;white-space:nowrap}
+  .ripple{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.7);pointer-events:none}
+  .lock{display:flex;flex-direction:column}
+  .lock .mask{overflow:hidden;padding-bottom:.06em}
+  .lock .wm{font-family:"Poppins",sans-serif;font-weight:500;font-size:170px;letter-spacing:-.02em;line-height:1;color:#fff}
+  .lock .with{font-family:"Poppins",sans-serif;font-weight:500;font-size:44px;color:#B7A5FF;margin-top:6px}
+  .lock .soon{align-self:flex-start;margin-top:34px;display:inline-flex;align-items:center;gap:12px;font-family:"JetBrains Mono",monospace;font-size:18px;letter-spacing:.18em;text-transform:uppercase;
+    padding:12px 22px 12px 16px;border-radius:999px;border:1px solid rgba(183,165,255,.45);background:linear-gradient(90deg,rgba(124,92,240,.38),rgba(91,63,214,.12))}
+  .lock .soon i{width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 0 12px #B7A5FF}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="c"></canvas>
+  <div id="ov"></div>
+</div>
+<script src="../node_modules/three/build/three.min.js"></script>
+<script src="scene.js"></script>
+<script>
+const P = new URLSearchParams(location.search);
+const W = 1920, H = 1080, DURATION = 26;
+const SV = [
+  ['Money', '#8B6CFF'], ['Bills', '#8B6CFF'], ['Documents', '#A78BFA'], ['Wiki', '#A78BFA'], ['Chat', '#C9BBFF'], ['Planner', '#E4DCFF'],
+  ['Trips', '#E4DCFF'], ['Events', '#E4DCFF'], ['Bus', '#E4DCFF'], ['Food', '#E4DCFF'], ['Design', '#E4DCFF'], ['More', '#FFFFFF']
+];
+const LINKS = [[0,1],[0,9],[0,6],[6,8],[6,7],[7,10],[4,7],[2,3],[5,1],[5,6],[4,5]];
+const S = ZerithScene(document.getElementById('c'), W, H, { net: SV.map(s => s[1]), links: LINKS, dust: 1500, seed: 5 });
+
+const ov = document.getElementById('ov');
+const el = (cls, html, parent = ov) => { const d = document.createElement('div'); d.className = cls; d.innerHTML = html; parent.appendChild(d); return d; };
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const seg = (t, a, b) => clamp((t - a) / (b - a));
+const lerp = (a, b, k) => a + (b - a) * k;
+const eOut = k => 1 - Math.pow(1 - k, 3);
+const eIO = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+const eBack = k => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(k - 1, 3) + c1 * Math.pow(k - 1, 2); };
+const win = (t, a, b, f = .4) => seg(t, a, a + f) * (1 - seg(t, b - f, b));
+const show = (n, k, dy = 24) => { n.style.opacity = k; n.style.transform = `translateY(${(1 - k) * dy}px)`; };
+
+// Headlines, one per scene
+const heads = [
+  [0.3, 4.8, 'The problem', 'Your day runs on too many apps.', 'Every one of them wants your attention.'],
+  [5.4, 9.4, 'Meet Arko', 'One voice for all of them.', 'Zerith\'s assistant sits at the centre of everything.'],
+  [9.6, 15.2, 'Arko does the work', 'One sentence. Every app at once.', 'Trips, bus, food, money, calendar and chat, in seconds.'],
+  [15.4, 19.4, 'You stay in control', 'Arko asks before it spends.', 'Nothing is booked or paid without your yes.'],
+  [19.6, 22.6, 'Then it goes quiet', 'Less screen time. More living.', 'Arko gives you your time back.']
+].map(([a, b, e, h, p]) => ({ a, b, n: el('abs head', `<span class="eyebrow">${e}</span><h1>${h}</h1><p>${p}</p>`) }));
+
+// Service chips: scattered chaos first, then they become the network's labels
+let seed = 9; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const chips = SV.map(([name, c], i) => {
+  const n = el('chip', `<i></i>${name}<b>${1 + Math.floor(rnd() * 9)}</b>`); n.style.setProperty('--c', c);
+  let x, y; do { x = 160 + rnd() * 1560; y = 330 + rnd() * 640; } while (x < 1000 && y < 340);
+  return { n, b: n.querySelector('b'), x, y, ph: rnd() * 6 };
+});
+
+// What Arko does, step by step: [service index, label, line, amount, start]
+const steps = [
+  [6, 'Trips', '2 nights, sea-view stay in Pondicherry', '₹9,200', 9.9],
+  [8, 'Bus', 'Sat 6:30 am, Chennai → Pondicherry, return for 2', '₹1,800', 10.8],
+  [9, 'Food', 'Meals and outings set aside', '₹2,900', 11.7],
+  [0, 'Money', 'Total ₹13,900, within your ₹15,000 budget', '', 12.6],
+  [5, 'Planner', 'Saturday and Sunday blocked in your calendar', '', 13.5],
+  [4, 'Chat', 'Plan shared with Priya', '', 14.4]
+];
+const cards = steps.map(([i, lab, line, amt], k) => {
+  const n = el('card', `<span class="ic"></span><span class="tx"><small>${lab}</small><span>${line}</span></span>${amt ? `<span class="amt">${amt}</span>` : ''}<span class="ok">✓</span>`);
+  n.style.setProperty('--c', SV[i][1]); n.style.top = (236 + k * 112) + 'px'; return n;
+});
+
+const user1 = el('bub user', 'Hey Arko, plan a weekend in Pondicherry under ₹15,000.');
+const arko1 = el('bub arko', '<em>Arko</em>All set for ₹13,900. Shall I book it?');
+const user2 = el('bub user', 'Yes, book it.');
+const arko2 = el('bub arko', '<em>Arko</em>Booked. Have a great weekend.');
+const status = el('abs status', '');
+const ripples = [0, 1, 2].map(() => el('ripple', ''));
+const lock = el('abs lock', '<div class="mask"><div class="wm">Zerith</div></div><div class="with">with Arko</div><div class="soon"><i></i>Coming soon · zerith.in</div>');
+const wm = lock.querySelector('.wm'), withA = lock.querySelector('.with'), soonP = lock.querySelector('.soon');
+
+const C = { cx: 740, cy: 500, r: 108 };
+const END = { cx: W * .3, cy: H * .47, r: H * .16 };
+const fullText = user1.textContent;
+
+window.frame = function (t) {
+  // ---- 3D ----
+  const g = eBack(seg(t, 4.0, 5.0));
+  const net = eIO(seg(t, 4.4, 6.0)) * (1 - eIO(seg(t, 19.6, 21.2)));
+  const mv = eIO(seg(t, 22.4, 23.6));
+  const listen = win(t, 6.9, 9.7, .3);
+  const active = t > 9.9 && t < 15.3 ? steps.filter(s => t >= s[4]).at(-1)[0] : (t > 6.9 && t < 9.7 ? -1 : -2);
+  S.set({
+    t, cx: lerp(C.cx, END.cx, mv), cy: lerp(C.cy, END.cy, mv), radius: lerp(C.r, END.r, mv) * Math.max(g, 1e-3),
+    rx: .05, ry: Math.sin(t * .35) * .14, spread: .18,
+    grow: [1, 1, 1, 1], emph: [1, 1, 1, 1], op: seg(t, 3.9, 4.3),
+    halo: (1 + listen * .8) * seg(t, 4, 5), rings: 0, sat: 0, dust: .8 * seg(t, 0, 1.2) * (1 - .4 * seg(t, 19.6, 21)),
+    net, active, netRot: t * .06, netTilt: .32
+  });
+  S.render();
+
+  // ---- headlines ----
+  heads.forEach(h => show(h.n, win(t, h.a, h.b, .5)));
+
+  // ---- chips → labels ----
+  chips.forEach((c, i) => {
+    const p = S.node(i), lx = p.x + 16, ly = p.y - 22;
+    const chaosIn = eOut(seg(t, .5 + i * .12, 1.1 + i * .12));
+    const fly = eIO(seg(t, 4.4 + i * .04, 6.0 + i * .04));
+    const jx = Math.sin(t * 1.4 + c.ph) * 10 * (1 - fly), jy = Math.cos(t * 1.1 + c.ph) * 8 * (1 - fly);
+    const x = lerp(c.x, lx, fly) + jx, y = lerp(c.y, ly, fly) + jy;
+    c.n.style.transform = `translate(${x}px,${y}px) scale(${lerp(1, .9, fly)})`;
+    c.n.style.transformOrigin = '0 50%';
+    const fadeOut = 1 - seg(t, 19.6, 20.6);
+    c.n.style.opacity = chaosIn * fadeOut * (fly > .9 && p.behind ? .5 : 1);
+    c.b.style.opacity = (1 - seg(t, 4.2, 4.8)) * (.75 + .25 * Math.sin(t * 6 + c.ph));
+    c.n.classList.toggle('on', i === active);
+  });
+
+  // ---- listening ----
+  const pt = S.point(0, 1.2 - .214, .27);
+  ripples.forEach((r, k) => {
+    const u = ((t - 6.9) / 1.2 + k / 3) % 1, R = 20 + u * 150;
+    r.style.width = r.style.height = 2 * R + 'px';
+    r.style.left = (pt.x - R) + 'px'; r.style.top = (pt.y - R) + 'px';
+    r.style.opacity = listen * (1 - u) * .8;
+  });
+  const below = S.point(0, -1.9, 0);
+  const stTxt = t < 9.7 ? 'Listening…' : t < 15.3 ? 'Working on it…' : t < 17.6 ? 'Waiting for your yes' : 'Done';
+  status.textContent = stTxt;
+  status.style.transform = `translate(${below.x - status.offsetWidth / 2}px,${below.y}px)`;
+  status.style.opacity = win(t, 6.9, 19.4, .4);
+
+  // user types the request
+  const typed = Math.floor(fullText.length * seg(t, 7.1, 9.2));
+  user1.textContent = fullText.slice(0, Math.max(typed, 1));
+  const bx = 330, bubR = 1190;
+  const place = (n, x, y, right) => { n.style.left = right ? '' : x + 'px'; n.style.right = right ? (W - x) + 'px' : ''; n.style.top = y + 'px'; };
+  place(user1, bubR, 830, true); show(user1, win(t, 7.0, 15.4, .4), 16);
+  place(arko1, bx, 790, false); show(arko1, win(t, 15.5, 19.6, .4), 16);
+  place(user2, bubR, 880, true); show(user2, win(t, 16.8, 19.6, .3), 16);
+  place(arko2, bx, 950, false); show(arko2, win(t, 17.6, 19.6, .4), 16);
+
+  // ---- step cards ----
+  cards.forEach((n, k) => {
+    const a = steps[k][4];
+    show(n, eOut(seg(t, a, a + .45)) * (1 - seg(t, 19.4, 20.0)), 30);
+    n.querySelector('.ok').style.opacity = seg(t, a + .5, a + .75);
+  });
+
+  // ---- lockup ----
+  lock.style.transform = `translate(${END.cx + END.r + 90}px,${END.cy - 150}px)`;
+  lock.style.opacity = t > 22.6 ? 1 : 0;
+  const kw = eOut(seg(t, 22.9, 23.8));
+  wm.style.transform = `translateY(${(1 - kw) * 110}%)`;
+  show(withA, eOut(seg(t, 23.6, 24.3)), 20);
+  show(soonP, eOut(seg(t, 24.3, 25.0)), 20);
+};
+
+window.ready = document.fonts.ready.then(() => { frame(0); return true; });
+if (!P.has('render')) window.ready.then(() => { const t0 = performance.now(); (function loop(now) { frame(((now - t0) / 1000) % (DURATION + 1)); requestAnimationFrame(loop); })(t0); });
+</script>
+</body>
+</html>

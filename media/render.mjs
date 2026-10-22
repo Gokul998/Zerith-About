@@ -32,9 +32,9 @@ async function still(query, w, h, file, dpr = 1) {
   console.log('✓', file);
 }
 
-async function video(w, h, file, fps = 30, seconds = 12) {
+async function video(w, h, file, fps = 30, seconds = 12, pageFile = 'video.html') {
   await page.setViewport({ width: w, height: h, deviceScaleFactor: 1 });
-  await page.goto(src('video.html') + `?w=${w}&h=${h}&render=1`, { waitUntil: 'networkidle0' });
+  await page.goto(src(pageFile) + `?w=${w}&h=${h}&render=1`, { waitUntil: 'networkidle0' });
   await page.evaluate(() => window.ready);
   const ff = spawn(ffmpegPath, [
     '-y', '-f', 'image2pipe', '-framerate', String(fps), '-i', '-',
@@ -64,5 +64,12 @@ if (what === 'all' || what === 'stills') {
 if (what === 'all' || what === 'video') {
   await video(1920, 1080, 'zerith-reveal-1920x1080.mp4');
   await video(1080, 1080, 'zerith-reveal-1080x1080.mp4');
+}
+if (what === 'all' || what === 'arko') {
+  await video(1920, 1080, 'arko-vision-1920x1080.mp4', 30, 26, 'arko.html');
+  // poster frame for the website
+  await page.evaluate(t => window.frame(t), 14.6);
+  await page.screenshot({ path: path.join(out, 'arko-vision-poster.jpg'), type: 'jpeg', quality: 86, clip: { x: 0, y: 0, width: 1920, height: 1080 } });
+  console.log('✓ arko-vision-poster.jpg');
 }
 await browser.close();

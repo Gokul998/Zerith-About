@@ -278,6 +278,7 @@ The page avoids grids and card layouts. It is one continuous night sky with a fi
 | 1 | **Hero** | `#top` | "Coming soon" badge, H1 "Where clarity meets possibility.", lead, two buttons. 3D mark floats on the right. |
 | 2 | **Why Zerith** | `#story` | "Life runs on too many apps." Problem statement; text left, mark right. |
 | 3 | **Zerith Core** | `#core` | "One brain. Everything connected." 3D network: Arko (the mark) at the centre, 12 services orbiting and wired to it with data pulses. Tap/hover a service to fill the detail panel ("Ask Arko: …"); auto-cycles every 3.2s. |
+| 3b | **Meet Arko** | `#arko` | "Say 'Hey Arko'. Consider it done." The Arko concept film (plays only while on screen), the name story and backronym, and six traits. Mark sits top right, then hides while the traits are read. |
 | 4 | **What we do** | `#layers` | "Four layers. One companion." Then four cards (Money → Life); mark turns side-on, spreads into depth and lights one ring at a time. |
 | 5 | **Vision** | `#vision` | "One companion for your whole life.", mission, and the "What Zerith solves" Today → With Zerith list (5 rows). |
 | 6 | **Beliefs** | `#beliefs` | Sticky section; vertical scroll moves five principle cards sideways along a curved track. |
@@ -481,6 +482,7 @@ Sources live in `media/src/` and reuse the website's 3D mark (`scene.js`). Finis
 | File | Use |
 |---|---|
 | `zerith-reveal-1920x1080.mp4` | 12s brand reveal, 16:9 (website, YouTube, LinkedIn) |
+| `arko-vision-1920x1080.mp4` (+ `arko-vision-poster.jpg`) | 26s Arko concept film, embedded on the site: app chaos → Meet Arko → "Hey Arko, plan a weekend in Pondicherry under ₹15,000" → services light up with result cards → Arko asks before booking → goes quiet → Zerith with Arko. Source `media/src/arko.html`; render with `node render.mjs arko`. |
 | `zerith-reveal-1080x1080.mp4` | Same reveal, square (LinkedIn / Instagram feed) |
 | `linkedin-personal-cover-1584x396.png` (+ `@2x`) | Personal profile banner; content sits centre-right to clear the profile photo |
 | `linkedin-company-cover-1128x191.png` (+ `@2x`) | Company page cover |
