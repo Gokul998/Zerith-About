@@ -72,8 +72,9 @@ The page is a single static file with no build step.
 |---|---|
 | **Name** | Zerith |
 | **Tagline** | Where clarity meets possibility |
-| **What Zerith does** | Builds intelligent tools that bring what an organisation already knows to the surface, so people can see it, ask it and act on it. |
-| **Core idea** | Four layers (Data, Knowledge, Conversation, Clarity) all rising to one point of light. |
+| **What Zerith does** | A personal AI companion that runs money, documents, messages, plans, trips and bookings from one app, then gives the user their time back ("a digital detox that runs on digital"). |
+| **Voice assistant** | **Arko** — wake word "Hey Arko". Sanskrit *arka* = sun; echoes the arc reactor at the centre of Iron Man's suit. Backronym: **A**daptive **R**easoning and **K**nowledge **O**perator. Always written "Arko" (capital A only). |
+| **Core idea** | Four layers (Money, Knowledge, Conversation, Life) all rising to one point: you, with your time back. |
 | **Personality** | Calm, precise, confident, quietly futuristic. Never loud or hype-driven. |
 
 ### The four layers
@@ -82,17 +83,17 @@ The logo and the page's story share one structure. Each ring maps to a layer:
 
 | Ring | Colour | Layer | Line | Role |
 |---|---|---|---|---|
-| Outer (r 56) | Deep violet `#5B3FD6` | **01 Data** | Start from what's true. | The foundation |
-| Second (r 40) | Violet `#7C5CF0` | **02 Knowledge** | Find what you already know. | The memory |
-| Third (r 24) | Lavender `#B7A5FF` | **03 Conversation** | Remember what was said. | The voice |
-| The point (r 10) | White `#FFFFFF` | **04 Clarity** | See it, then decide. | Where it all meets |
+| Outer (r 56) | Deep violet `#5B3FD6` | **01 Money** | Know where every rupee goes. | The foundation |
+| Second (r 40) | Violet `#7C5CF0` | **02 Knowledge** | Find anything in seconds. | Your memory |
+| Third (r 24) | Lavender `#B7A5FF` | **03 Conversation** | Talk, and it gets done. | Your voice (Arko) |
+| The point (r 10) | White `#FFFFFF` | **04 Life** | Plans, trips and moments, handled. | You |
 
 ### Principles ("What we believe")
 
 1. **Clarity is a feature.** Removing a step is worth more than adding a button.
-2. **Your data stays yours.** Work inside the customer's boundaries and show where every answer came from.
-3. **People make the call.** Tools prepare the decision; a person makes it.
-4. **Small and sharp.** One tool people love beats ten they tolerate.
+2. **Your data stays yours.** Every connection needs consent; every answer shows its source.
+3. **You make the call.** Nothing involving money or plans happens without the user's yes.
+4. **Time back is the goal.** Success is time given back, not time spent in the app.
 5. **Quiet by default.** Good software gets out of the way once the work is done.
 
 ---
@@ -275,11 +276,12 @@ The page avoids grids and card layouts. It is one continuous night sky with a fi
 | # | Section | ID | What happens |
 |---|---|---|---|
 | 1 | **Hero** | `#top` | "Coming soon" badge, H1 "Where clarity meets possibility.", lead, two buttons. 3D mark floats on the right. |
-| 2 | **Why Zerith** | `#story` | Headline "Most knowledge at work is buried.", a supporting line, and an accent line with the key phrase in lavender. Text on the left; mark moves right and tilts. |
-| 3 | **Layers intro** | `#layers` | "Four layers. One point of light." Mark returns to front view. |
-| 4–7 | **Layer cards** | — | Four glass cards (Data → Clarity) alternate left and right. Mark turns side-on, spreads into depth, and lights up one ring at a time. |
-| 8 | **Beliefs** | `#beliefs` | Sticky section; vertical scroll moves five principle cards sideways along a curved track. |
-| 9 | **The mark** | `#mark` | "Everything leads to one clear answer." Labelled layer diagram (Data, Knowledge, Conversation, Clarity), lockups, copyable swatches, type specimens, do/don't. 3D mark fades out. |
+| 2 | **Why Zerith** | `#story` | "Life runs on too many apps." Problem statement; text left, mark right. |
+| 3 | **Zerith Core** | `#core` | "One brain. Everything connected." 3D network: Arko (the mark) at the centre, 12 services orbiting and wired to it with data pulses. Tap/hover a service to fill the detail panel ("Ask Arko: …"); auto-cycles every 3.2s. |
+| 4 | **What we do** | `#layers` | "Four layers. One companion." Then four cards (Money → Life); mark turns side-on, spreads into depth and lights one ring at a time. |
+| 5 | **Vision** | `#vision` | "One companion for your whole life.", mission, and the "What Zerith solves" Today → With Zerith list (5 rows). |
+| 6 | **Beliefs** | `#beliefs` | Sticky section; vertical scroll moves five principle cards sideways along a curved track. |
+| 7 | **Logo meaning** | `#mark` | "Everything leads to you." Labelled ring diagram (Money, Knowledge, Conversation, You). 3D mark fades out. |
 | 10 | **Close** | — | "Coming soon" badge, tagline, giant gradient "Zerith" wordmark, footer. Mark returns, centred. |
 
 Fixed layers (bottom to top): `.sky` (gradient) → `#gl` (WebGL canvas) → `.grain` (film grain) → `.glow` (cursor light) → content → `.nav`.
@@ -346,6 +348,7 @@ Every section that controls the 3D mark has a `data-state` attribute with a JSON
 | `op` | Opacity of the whole mark | 0 … 1 |
 | `rings` | Opacity of orbit rings and satellite | 0 … 1 |
 | `focus` | Index of the lit sphere (0 = outer … 3 = point); omit to light all | 0–3 |
+| `net` | Shows the Zerith Core service network around the mark | 0 … 1 |
 | `mx`, `my`, `mop`, `mscale` | Mobile overrides for x, y, op, scale | — |
 
 **How it works:** each frame, the script finds the two anchors either side of the viewport's middle line, blends their poses with a smoothstep curve, then eases the live pose toward that target (`lerp` factor 0.075; emphasis 0.09). On top of that it adds idle motion and pointer parallax.
@@ -356,11 +359,12 @@ Every section that controls the 3D mark has a `data-state` attribute with a JSON
 |---|---|
 | Hero | Right side, front view, nearly flat (`spread 0.15`), large |
 | Why Zerith | Right, turned +0.55, spread 0.9, slightly faded |
+| Zerith Core | Right of centre, small (0.5), flat, `net 1` — services orbit at radius 4.1, tilt 0.32 (0.62 on mobile) |
 | Layers intro | Right, front view, flat |
-| 01 Data | Left, turned −1.05, exploded (1.7), outer ring lit |
+| 01 Money | Left, turned −1.05, exploded (1.7), outer ring lit |
 | 02 Knowledge | Right, turned +1.05, second ring lit |
 | 03 Conversation | Left, turned −1.05, third ring lit |
-| 04 Clarity | Right, turned 0.35, spread 0.6, point lit |
+| 04 Life | Right, turned 0.35, spread 0.6, point lit |
 | Beliefs | Small (0.42), top right, 55% opacity |
 | The mark | Hidden (`op 0`) so the 2D layer diagram stands alone |
 | Close | Centred, front view, full opacity |

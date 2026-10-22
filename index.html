@@ -7,13 +7,13 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zerith.in/">
 <meta property="og:title" content="Zerith">
-<meta property="og:description" content="Where clarity meets possibility. Coming soon.">
+<meta property="og:description" content="One companion for your whole life. Where clarity meets possibility. Coming soon.">
 <meta property="og:image" content="https://zerith.in/brand/dark-background/banners/og-link-preview-1200x630.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="apple-touch-icon" href="brand/dark-background/favicon/favicon-180x180.png">
 <title>Zerith · Where clarity meets possibility</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Zerith builds tools that bring what an organisation knows to the surface. Where clarity meets possibility.">
+<meta name="description" content="Zerith is a personal AI companion that runs your money, documents, messages, plans and trips from one app, then gives you your time back.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -160,6 +160,56 @@ p{margin:0}
   .belief{width:100%;min-height:0}
 }
 
+.vision{padding-block:18vh 14vh}
+.vision .wrap{display:flex;flex-direction:column;align-items:flex-end;gap:12vh}
+.vz{max-width:min(620px,50vw);display:flex;flex-direction:column;gap:26px}
+.vz h2{font-size:clamp(40px,5.4vw,80px)}
+.vz>p{color:var(--muted);font-size:clamp(18px,1.6vw,21px);text-wrap:pretty}
+.mission{display:flex;flex-direction:column;gap:10px;padding-top:22px;border-top:1px solid var(--line)}
+.mission .k{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--lav)}
+.mission p{font-family:var(--f-display);font-weight:500;font-size:clamp(22px,2.2vw,30px);line-height:1.3;letter-spacing:-.015em;text-wrap:balance}
+.changes{width:100%;border-radius:28px;border:1px solid var(--line);background:rgba(11,11,26,.74);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:clamp(24px,4vw,48px)}
+.changes h3{font-size:clamp(26px,2.6vw,38px);letter-spacing:-.025em;margin-bottom:22px}
+.changes ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.changes li{display:flex;align-items:center;gap:28px;padding-block:24px;border-top:1px solid var(--line)}
+.changes .was,.changes .now{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:6px}
+.changes small{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.changes .was{color:var(--muted)}
+.changes .was small{color:var(--dim)}
+.changes .now{color:var(--fg);font-family:var(--f-display);font-weight:500;font-size:clamp(17px,1.5vw,20px);letter-spacing:-.01em}
+.changes .now small{color:var(--lav);font-weight:500}
+.changes .arr{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(183,165,255,.35);color:var(--lav);background:rgba(124,92,240,.12)}
+
+/* Zerith Core network */
+.core{min-height:118vh;display:flex;align-items:center;padding-block:14vh}
+.core .wrap{width:100%}
+.cz{max-width:min(440px,38vw);display:flex;flex-direction:column;gap:22px}
+.cz h2{font-size:clamp(40px,5vw,76px)}
+.cz>p{color:var(--muted);font-size:clamp(17px,1.5vw,20px);text-wrap:pretty}
+.cz .arko{color:var(--lav);font-weight:600}
+.cdet{border:1px solid var(--line);border-radius:22px;padding:22px 24px 24px;background:rgba(11,11,26,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;flex-direction:column;gap:8px;min-height:180px}
+.cdet .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--lav)}
+.cdet h3{font-size:clamp(24px,2.2vw,30px);letter-spacing:-.02em}
+.cdet p{color:var(--muted)}
+.cdet .ask{font-family:var(--f-mono);font-size:13px;line-height:1.5;color:var(--fg);border-top:1px solid var(--line);padding-top:12px;margin-top:4px}
+.cdet.flash{animation:fade .5s both}
+.cz .hint{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.svc-list{display:none;list-style:none;margin:0;padding:0;flex-wrap:wrap;gap:8px}
+.svc-list li{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--fg)}
+.no-gl .svc-list{display:flex}
+.no-gl .cz .hint{display:none}
+.core-space{display:none}
+#netl{position:fixed;inset:0;z-index:3;pointer-events:none;overflow:hidden}
+.nl{position:absolute;left:0;top:0;display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 9px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(11,11,26,.74);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--fg);font:500 13px/1.2 var(--f-body);white-space:nowrap;cursor:pointer;
+  pointer-events:none;opacity:0;transition:border-color .3s,background .3s;will-change:transform,opacity}
+#netl.live .nl{pointer-events:auto}
+.nl i{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+.nl:hover,.nl.on{border-color:var(--lav);background:rgba(124,92,240,.4)}
+.nl.core-l{font-family:var(--f-display);font-size:14px;padding:7px 14px;background:rgba(124,92,240,.3);border-color:rgba(183,165,255,.5);cursor:default}
+.nl.core-l b{font-weight:600}
+.nl.core-l span{color:var(--lav);font-weight:500}
+
 /* Mark / brand */
 .mark{padding-block:18vh 12vh;position:relative}
 .mark .wrap{display:flex;flex-direction:column;gap:9vh}
@@ -251,6 +301,15 @@ p{margin:0}
   .card{padding:26px;background:rgba(11,11,26,.78)}
   .statement{padding-block:14vh}
   .st{max-width:none}
+  .core{min-height:0;display:block;padding-block:12vh 0}
+  .cz{max-width:none}
+  .core-space{display:block;height:78vh}
+  .nl{font-size:11px;padding:4px 9px 4px 7px;gap:6px}
+  .nl i{width:6px;height:6px}
+  .vision .wrap{align-items:stretch}
+  .vz{max-width:none}
+  .changes li{flex-direction:column;align-items:flex-start;gap:12px}
+  .changes .arr{transform:rotate(90deg);width:32px;height:32px}
   .no-gl .fallback{right:auto;left:50%;top:120px;width:60vw;transform:translateX(-50%)}
 }
 @media (prefers-reduced-motion:reduce){
@@ -283,13 +342,14 @@ p{margin:0}
 <canvas id="gl" aria-hidden="true"></canvas>
 <div class="grain"></div>
 <div class="glow" id="glow"></div>
+<div id="netl" aria-label="Zerith services"></div>
 
 <header class="nav" id="nav">
   <a class="brand" href="#top" aria-label="Zerith, back to top"><svg aria-hidden="true"><use href="#mk"/></svg>Zerith</a>
-  <a class="l" href="#story">Story</a>
-  <a class="l" href="#layers">Layers</a>
-  <a class="l" href="#beliefs">Beliefs</a>
-  <a class="l keep" href="#mark">The mark</a>
+  <a class="l" href="#story">Why Zerith</a>
+  <a class="l keep" href="#core">Zerith Core</a>
+  <a class="l" href="#layers">What we do</a>
+  <a class="l" href="#vision">Vision</a>
   <span class="bar" id="bar"></span>
 </header>
 
@@ -299,10 +359,10 @@ p{margin:0}
       <div class="hero-copy">
         <span class="soon"><i></i>Coming soon</span>
         <h1><span class="ln"><span>Where clarity</span></span><span class="ln"><span>meets</span></span><span class="ln"><span><em>possibility.</em></span></span></h1>
-        <p class="lead">Zerith builds intelligent tools that bring what an organisation already knows to the surface, so people can see it, ask it, and act on it.</p>
+        <p class="lead">Zerith is your personal AI companion. One app that runs your money, documents, messages, plans and trips, then gives you your time back. Just say "Hey Arko".</p>
         <div class="ctas">
-          <a class="btn p" href="#story">Read our story <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a>
-          <a class="btn s" href="#mark">Meet the mark</a>
+          <a class="btn p" href="#core">See how it works <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg></a>
+          <a class="btn s" href="#vision">Our vision</a>
         </div>
       </div>
     </div>
@@ -314,27 +374,48 @@ p{margin:0}
     <div class="wrap">
       <div class="st">
         <span class="eyebrow">Why Zerith</span>
-        <h2 class="rv">Most knowledge at work is buried.</h2>
-        <p class="rv">It sits in dashboards nobody opens, documents nobody can find and meetings nobody remembers.</p>
-        <p class="st-accent rv">Zerith brings it to the surface: <em>clear enough to see, simple enough to ask</em> and ready to act on.</p>
+        <h2 class="rv">Life runs on too many apps.</h2>
+        <p class="rv">Payments in one app, bills in email, files in a drive, plans in group chats, trips across four booking sites. You are the only thing connecting them, and every app wants more of your time.</p>
+        <p class="st-accent rv">Zerith brings it into one place: <em>one companion that knows your world and acts on it</em>, so you can put the phone down.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="core" id="core" data-state='{"x":0.3,"y":-0.02,"ry":0,"rx":0,"spread":0.18,"scale":0.5,"op":1,"rings":0,"net":1,"mx":0,"my":-0.36,"mop":1,"mscale":0.3}'>
+    <div class="wrap">
+      <div class="cz">
+        <span class="eyebrow">Zerith Core</span>
+        <h2 class="rv">One brain. Everything connected.</h2>
+        <p class="rv">At the centre is <strong class="arko">Arko</strong>, Zerith's voice assistant. Just say "Hey Arko". Every service plugs into it and shares what it knows, so Arko can answer and act across all of them.</p>
+        <div class="cdet rv" id="cdet" aria-live="polite">
+          <span class="k" id="cdet-k">Service · Money</span>
+          <h3 id="cdet-h">Money</h3>
+          <p id="cdet-p">Every UPI, card and bank payment tracked and sorted automatically.</p>
+          <span class="ask" id="cdet-a">Ask Arko: "How much did I spend on food this month?"</span>
+        </div>
+        <span class="hint">Tap a service in the network to see what it does</span>
+        <ul class="svc-list">
+          <li>Money</li><li>Bills</li><li>Documents</li><li>Wiki</li><li>Chat</li><li>Planner</li><li>Trips</li><li>Events</li><li>Bus</li><li>Food</li><li>Design</li><li>More</li>
+        </ul>
+      </div>
+      <div class="core-space" aria-hidden="true"></div>
     </div>
   </section>
 
   <section id="layers">
     <div class="layers-intro" data-state='{"x":0.42,"y":0,"ry":0,"rx":0,"spread":0.2,"scale":1,"op":1,"rings":1,"mx":0,"my":0.45,"mop":0.35}'>
       <div class="wrap rv">
-        <span class="eyebrow">How we think</span>
-        <h2>Four layers. One point of light.</h2>
-        <p>Our mark is four circles that all meet at a single point. That is how we see an organisation: data, knowledge, conversation and ideas, each a layer, all rising toward the same clear answer.</p>
+        <span class="eyebrow">What we do</span>
+        <h2>Four layers. One companion.</h2>
+        <p>Everything Zerith does sits in one of four layers, the same four circles in our logo. Each layer makes one part of life easier. Together they lead to the same place: you, with your time back.</p>
       </div>
     </div>
 
     <div class="layer r" data-state='{"x":-0.42,"y":-0.05,"ry":-1.05,"rx":0.28,"spread":1.7,"scale":1,"op":1,"focus":0,"rings":0.3,"mx":0,"my":0.5,"mop":0.6}'>
       <div class="wrap"><article class="card">
-        <div class="no"><span class="dot" style="background:#5B3FD6"></span><b>01</b> Data</div>
-        <h3>Start from what's true.</h3>
-        <p>We connect to the systems a team already runs and let anyone ask questions in plain language. No query writing, no waiting a week for a report.</p>
+        <div class="no"><span class="dot" style="background:#5B3FD6"></span><b>01</b> Money</div>
+        <h3>Know where every rupee goes.</h3>
+        <p>Payments, bills, budgets and subscriptions tracked automatically from UPI, cards and bank alerts. No spreadsheets, no manual entry.</p>
         <div class="tag">Outer ring · the foundation</div>
       </article></div>
     </div>
@@ -342,28 +423,49 @@ p{margin:0}
     <div class="layer" data-state='{"x":0.42,"y":-0.05,"ry":1.05,"rx":0.28,"spread":1.7,"scale":1,"op":1,"focus":1,"rings":0.3,"mx":0,"my":0.5,"mop":0.6}'>
       <div class="wrap"><article class="card">
         <div class="no"><span class="dot" style="background:#7C5CF0"></span><b>02</b> Knowledge</div>
-        <h3>Find what you already know.</h3>
-        <p>Policies, wikis and files become one searchable memory. Every answer points back to the document it came from, so people can check it.</p>
-        <div class="tag">Second ring · the memory</div>
+        <h3>Find anything in seconds.</h3>
+        <p>Documents of every type open and search in one place, and wiki spaces keep your notes and plans organised.</p>
+        <div class="tag">Second ring · your memory</div>
       </article></div>
     </div>
 
     <div class="layer r" data-state='{"x":-0.42,"y":-0.05,"ry":-1.05,"rx":0.28,"spread":1.7,"scale":1,"op":1,"focus":2,"rings":0.3,"mx":0,"my":0.5,"mop":0.6}'>
       <div class="wrap"><article class="card">
         <div class="no"><span class="dot" style="background:#B7A5FF"></span><b>03</b> Conversation</div>
-        <h3>Remember what was said.</h3>
-        <p>Meetings turn into decisions, owners and next steps. The conversation keeps working after everyone has left the call.</p>
-        <div class="tag">Third ring · the voice</div>
+        <h3>Talk, and it gets done.</h3>
+        <p>Chat with people, or just say "Hey Arko". Ask by voice or text, and Arko updates your plans, money and reminders at once.</p>
+        <div class="tag">Third ring · your voice</div>
       </article></div>
     </div>
 
     <div class="layer" data-state='{"x":0.42,"y":0,"ry":0.35,"rx":0.1,"spread":0.6,"scale":1.15,"op":1,"focus":3,"rings":0.8,"mx":0,"my":0.5,"mop":0.6}'>
       <div class="wrap"><article class="card">
-        <div class="no"><span class="dot" style="background:#FFFFFF"></span><b>04</b> Clarity</div>
-        <h3>See it, then decide.</h3>
-        <p>Ideas and systems become diagrams people can read in seconds. This is the point where every layer meets, and where a decision gets made.</p>
-        <div class="tag">The point · where it all meets</div>
+        <div class="no"><span class="dot" style="background:#FFFFFF"></span><b>04</b> Life</div>
+        <h3>Plans, trips and moments, handled.</h3>
+        <p>Planner, holidays, events, bus and food bookings, and a design studio for invites. This is where every layer meets you.</p>
+        <div class="tag">The point · you</div>
       </article></div>
+    </div>
+  </section>
+
+  <section class="vision" id="vision" data-state='{"x":-0.52,"y":-0.1,"ry":-0.35,"rx":0.12,"spread":0.35,"scale":0.9,"op":0.95,"rings":1,"mx":0,"my":0.62,"mop":0.2}'>
+    <div class="wrap">
+      <div class="vz">
+        <span class="eyebrow">Our vision</span>
+        <h2 class="rv">One companion for your whole life.</h2>
+        <p class="rv">We picture a day where your phone works for you. Bills are paid on time, plans organise themselves, and a trip is booked in a single conversation. You spend less time on screens and more time on what matters.</p>
+        <div class="mission rv"><span class="k">Our mission</span><p>Replace the dozens of apps people juggle with one calm companion that understands their world, acts on it, and then gets out of the way.</p></div>
+      </div>
+      <div class="changes rv">
+        <h3>What Zerith solves</h3>
+        <ol>
+          <li><div class="was"><small>Today</small>Money is spread across UPI apps, cards and SMS alerts.</div><span class="arr" aria-hidden="true">→</span><div class="now"><small>With Zerith · Money</small>Every payment tracked and sorted automatically.</div></li>
+          <li><div class="was"><small>Today</small>Files hide in email, drives and chats.</div><span class="arr" aria-hidden="true">→</span><div class="now"><small>With Zerith · Knowledge</small>Every document opens and searches in one place.</div></li>
+          <li><div class="was"><small>Today</small>Plans live in group chats and get lost.</div><span class="arr" aria-hidden="true">→</span><div class="now"><small>With Zerith · Conversation</small>Say it once and Zerith updates everything.</div></li>
+          <li><div class="was"><small>Today</small>Five apps to plan one trip.</div><span class="arr" aria-hidden="true">→</span><div class="now"><small>With Zerith · Life</small>One conversation plans, books and budgets it.</div></li>
+          <li><div class="was"><small>Today</small>Hours a day switching between apps.</div><span class="arr" aria-hidden="true">→</span><div class="now"><small>With Zerith · Time back</small>A two-minute daily brief, then put the phone down.</div></li>
+        </ol>
+      </div>
     </div>
   </section>
 
@@ -375,9 +477,9 @@ p{margin:0}
       </div>
       <div class="track" id="track">
         <article class="belief"><span class="orb"></span><span class="k">Principle · Clarity</span><div><h3>Clarity is a feature.</h3><p>Removing a step is worth more than adding a button. If it needs a manual, it is not finished.</p></div></article>
-        <article class="belief"><span class="orb"></span><span class="k">Principle · Trust</span><div><h3>Your data stays yours.</h3><p>We work inside your boundaries and show where every answer came from. Nothing is a black box.</p></div></article>
-        <article class="belief"><span class="orb"></span><span class="k">Principle · Judgement</span><div><h3>People make the call.</h3><p>Our tools prepare the decision. A person makes it, with the evidence in front of them.</p></div></article>
-        <article class="belief"><span class="orb"></span><span class="k">Principle · Craft</span><div><h3>Small and sharp.</h3><p>We would rather build one tool people love than ten they tolerate.</p></div></article>
+        <article class="belief"><span class="orb"></span><span class="k">Principle · Trust</span><div><h3>Your data stays yours.</h3><p>Every connection needs your consent, and every answer shows where it came from. Nothing is a black box.</p></div></article>
+        <article class="belief"><span class="orb"></span><span class="k">Principle · Control</span><div><h3>You make the call.</h3><p>Zerith prepares and suggests. Nothing involving your money or your plans happens without your yes.</p></div></article>
+        <article class="belief"><span class="orb"></span><span class="k">Principle · Detox</span><div><h3>Time back is the goal.</h3><p>We measure success by how much time Zerith gives you, not by how long you spend in it.</p></div></article>
         <article class="belief"><span class="orb"></span><span class="k">Principle · Calm</span><div><h3>Quiet by default.</h3><p>Good software gets out of the way once the work is done. No noise, no badges begging for attention.</p></div></article>
       </div>
     </div>
@@ -386,7 +488,7 @@ p{margin:0}
   <section class="mark" id="mark" data-state='{"x":0.6,"y":0.4,"ry":0,"rx":0,"spread":0.3,"scale":0.5,"op":0,"rings":0,"mx":0,"my":0.6,"mop":0}'>
     <div class="wrap">
       <div class="mark-hero">
-        <div class="construct rv" aria-label="The Zerith mark: four layers, data, knowledge, conversation and clarity, meeting at one point">
+        <div class="construct rv" aria-label="The Zerith mark: four layers, money, knowledge, conversation and you, meeting at one point">
           <svg viewBox="92 30 196 144" role="img">
             <title>The four layers of the Zerith mark</title>
             <line class="g" x1="120" y1="44" x2="260" y2="44"/>
@@ -402,54 +504,17 @@ p{margin:0}
               <polyline points="215,100 252,100"/><circle cx="215" cy="100" r=".9"/>
               <polyline points="225,132 252,138"/><circle cx="225" cy="132" r=".9"/>
             </g>
-            <text class="lab" x="128" y="49.5" text-anchor="end">CLARITY</text>
+            <text class="lab" x="128" y="49.5" text-anchor="end">YOU</text>
             <text class="lab" x="128" y="81.5" text-anchor="end">CONVERSATION</text>
             <text class="lab" x="254" y="101.5">KNOWLEDGE</text>
-            <text class="lab" x="254" y="139.5">DATA</text>
+            <text class="lab" x="254" y="139.5">MONEY</text>
           </svg>
         </div>
         <div class="mark-copy rv">
-          <span class="eyebrow">The mark</span>
-          <h2>Everything leads to one clear answer.</h2>
-          <p>Our logo is four circles that meet at a single point. Each one is a layer of what an organisation knows: its data, its documents, its conversations and its ideas.</p>
-          <p>The white dot where they meet is the answer. <strong>That is what Zerith does: brings every layer together so the answer is easy to see.</strong></p>
-        </div>
-      </div>
-
-      <div class="block rv">
-        <div class="subhead"><h3>Lockups</h3><span>Poppins Medium · tracking −2%</span></div>
-        <div class="lockups">
-          <div class="lock d"><svg aria-hidden="true" viewBox="130 40 120 120"><use href="#mk"/></svg><span class="wm">Zerith</span><span class="cap">On navy · white point</span></div>
-          <div class="lock w"><svg aria-hidden="true" viewBox="130 40 120 120"><use href="#mk-l"/></svg><span class="wm">Zerith</span><span class="cap">On white · navy point</span></div>
-        </div>
-      </div>
-
-      <div class="block rv">
-        <div class="subhead"><h3>Colour</h3><span>Click a swatch to copy</span></div>
-        <div class="swatches" id="swatches">
-          <button class="sw" type="button" data-hex="#0B0B1A"><span class="chip" style="background:#0B0B1A"><span class="ok">Copied</span></span><span class="meta"><span class="n">Navy</span><span class="h">#0B0B1A</span><span class="r">Ground and wordmark on light</span></span></button>
-          <button class="sw" type="button" data-hex="#5B3FD6"><span class="chip" style="background:#5B3FD6"><span class="ok">Copied</span></span><span class="meta"><span class="n">Deep violet</span><span class="h">#5B3FD6</span><span class="r">Outer ring</span></span></button>
-          <button class="sw" type="button" data-hex="#7C5CF0"><span class="chip" style="background:#7C5CF0"><span class="ok">Copied</span></span><span class="meta"><span class="n">Violet</span><span class="h">#7C5CF0</span><span class="r">Second ring · primary accent</span></span></button>
-          <button class="sw" type="button" data-hex="#B7A5FF"><span class="chip" style="background:#B7A5FF"><span class="ok">Copied</span></span><span class="meta"><span class="n">Lavender</span><span class="h">#B7A5FF</span><span class="r">Third ring · highlights on dark</span></span></button>
-          <button class="sw" type="button" data-hex="#FFFFFF"><span class="chip" style="background:#FFFFFF"><span class="ok">Copied</span></span><span class="meta"><span class="n">White</span><span class="h">#FFFFFF</span><span class="r">The point · text on navy</span></span></button>
-        </div>
-      </div>
-
-      <div class="block rv">
-        <div class="subhead"><h3>Type</h3><span>Two families, one voice</span></div>
-        <div class="type">
-          <div class="spec"><span class="big" style="font-family:var(--f-display);font-weight:500">Aa</span><div class="row"><b>Poppins Medium</b><span>Wordmark · headlines</span></div></div>
-          <div class="spec"><span class="big" style="font-family:var(--f-body);font-weight:400">Aa</span><div class="row"><b>Figtree Regular</b><span>Body · interface</span></div></div>
-        </div>
-      </div>
-
-      <div class="block rv">
-        <div class="subhead"><h3>Using the mark</h3><span>Keep it simple</span></div>
-        <div class="rules">
-          <div class="rule y"><span class="t">● Do</span><h4>Keep clear space</h4><p>Leave at least one outer-ring radius of empty space on every side.</p></div>
-          <div class="rule y"><span class="t">● Do</span><h4>Flip only the point</h4><p>On light grounds the dot turns navy. The three rings never change colour.</p></div>
-          <div class="rule n"><span class="t">● Don't</span><h4>Separate the rings</h4><p>The circles always share the top tangent. Never move the point off it.</p></div>
-          <div class="rule n"><span class="t">● Don't</span><h4>Add effects to the flat mark</h4><p>No gradients, shadows or outlines in print. The 3D form is for motion and web only.</p></div>
+          <span class="eyebrow">What our logo means</span>
+          <h2>Everything leads to you.</h2>
+          <p>Our logo is four circles that meet at a single point. Each one is a layer of your life: your money, your knowledge and your conversations, rising toward the same place.</p>
+          <p>The white dot where they meet is you. <strong>That is what Zerith does: brings every layer together so your life is easier to see and simpler to run.</strong></p>
         </div>
       </div>
     </div>
@@ -464,7 +529,7 @@ p{margin:0}
       <div class="giant" aria-hidden="true">Zerith</div>
       <footer class="foot">
         <span>© 2026 Zerith</span>
-        <span><a href="#story">Story</a> · <a href="#layers">Layers</a> · <a href="#beliefs">Beliefs</a> · <a href="#mark">The mark</a> · <a href="#top">Back to top ↑</a></span>
+        <span><a href="#story">Why Zerith</a> · <a href="#core">Zerith Core</a> · <a href="#layers">What we do</a> · <a href="#vision">Vision</a> · <a href="#beliefs">Beliefs</a> · <a href="#top">Back to top ↑</a></span>
       </footer>
     </div>
   </section>
@@ -507,15 +572,6 @@ p{margin:0}
     c.addEventListener('pointerleave',()=>{c.dataset.tx=0;c.dataset.ty=0;});
   });
 
-  /* ---------- swatches ---------- */
-  document.getElementById('swatches').addEventListener('click',e=>{
-    const b=e.target.closest('.sw'); if(!b) return;
-    const hex=b.dataset.hex;
-    const done=()=>{b.classList.add('copied');setTimeout(()=>b.classList.remove('copied'),1400);};
-    try{navigator.clipboard.writeText(hex).then(done,()=>selectHex(b));}catch(_){selectHex(b);}
-  });
-  function selectHex(b){const h=b.querySelector('.h');const r=document.createRange();r.selectNodeContents(h);const s=getSelection();s.removeAllRanges();s.addRange(r);}
-
   /* ---------- pointer ---------- */
   const glow=document.getElementById('glow');
   let px=0,py=0,gx=-999,gy=-999,tgx=-999,tgy=-999;
@@ -549,7 +605,7 @@ p{margin:0}
 
   /* ---------- 3D ---------- */
   const anchors=[...document.querySelectorAll('[data-state]')].map(el=>({el,s:JSON.parse(el.dataset.state)}));
-  const KEYS=['x','y','rx','ry','spread','scale','op','rings'];
+  const KEYS=['x','y','rx','ry','spread','scale','op','rings','net'];
   function stateOf(a,mobile){
     const s=a.s, o={};
     KEYS.forEach(k=>o[k]=s[k]??(k==='rings'?1:0));
@@ -569,7 +625,42 @@ p{margin:0}
     return o;
   }
 
-  let gl=false, renderer, scene, camera, root, spheres=[], ringA, ringB, sat, halo, dust;
+  /* ---------- Zerith Core services ---------- */
+  const SERVICES=[
+    {n:'Money',l:'Money',c:'#8B6CFF',d:'Every UPI, card and bank payment tracked and sorted automatically.',a:'How much did I spend on food this month?'},
+    {n:'Bills',l:'Money',c:'#8B6CFF',d:'Bills, renewals and subscriptions caught before they cost you.',a:'Which subscriptions renew this week?'},
+    {n:'Documents',l:'Knowledge',c:'#A78BFA',d:'Open and preview any file type, from PDFs to spreadsheets and photos, in one place.',a:'Find my rental agreement.'},
+    {n:'Wiki',l:'Knowledge',c:'#A78BFA',d:'Spaces for notes, guides and shared plans, like a personal Confluence.',a:'What did we decide about the house move?'},
+    {n:'Chat',l:'Conversation',c:'#C9BBFF',d:'Message friends and family, with Zerith ready to help in any thread.',a:'Split last night\'s dinner with the group.'},
+    {n:'Planner',l:'Life',c:'#E4DCFF',d:'Your day, tasks and reminders, organised around what matters.',a:'What\'s on my plate tomorrow?'},
+    {n:'Trips',l:'Life',c:'#E4DCFF',d:'Holidays planned, booked and budgeted from one conversation.',a:'Plan a 3-day Goa trip under ₹30,000.'},
+    {n:'Events',l:'Life',c:'#E4DCFF',d:'Birthdays, weddings and get-togethers, with guests and costs in one view.',a:'Plan Amma\'s birthday dinner for 12.'},
+    {n:'Bus',l:'Life',c:'#E4DCFF',d:'Search and book buses without opening another app.',a:'Book a bus to Bangalore on Friday night.'},
+    {n:'Food',l:'Life',c:'#E4DCFF',d:'Order food and see what you spend on it.',a:'Order my usual from the place near office.'},
+    {n:'Design',l:'Life',c:'#E4DCFF',d:'Make invites, cards and posts in a few taps.',a:'Make an invite for Saturday\'s party.'},
+    {n:'More',l:'Coming next',c:'#FFFFFF',d:'Health, home, shopping and more plug into the same core next.',a:'What else can you do?'}
+  ];
+  const LINKS=[[0,1],[0,9],[0,6],[6,8],[6,7],[7,10],[4,7],[2,3],[5,1],[5,6],[4,5]];
+  const netl=document.getElementById('netl');
+  const coreLabel=document.createElement('div'); coreLabel.className='nl core-l'; coreLabel.innerHTML='<b>Arko</b><span>· Zerith\'s voice</span>'; netl.appendChild(coreLabel);
+  const labels=SERVICES.map((sv,i)=>{const b=document.createElement('button');b.type='button';b.className='nl';b.style.setProperty('--c',sv.c);b.innerHTML='<i></i>'+sv.n;b.addEventListener('click',()=>setActive(i,true));b.addEventListener('mouseenter',()=>setActive(i,true));netl.appendChild(b);return b;});
+  const cdet=document.getElementById('cdet');
+  let active=0, lastUser=-1e9;
+  function setActive(i,user){
+    if(user) lastUser=performance.now();
+    if(i===active && !user) return;
+    active=i; const sv=SERVICES[i];
+    document.getElementById('cdet-k').textContent='Service · '+sv.l;
+    document.getElementById('cdet-h').textContent=sv.n;
+    document.getElementById('cdet-p').textContent=sv.d;
+    document.getElementById('cdet-a').textContent='Ask Arko: "'+sv.a+'"';
+    labels.forEach((b,j)=>b.classList.toggle('on',j===i));
+    cdet.classList.remove('flash'); void cdet.offsetWidth; cdet.classList.add('flash');
+  }
+  labels[0].classList.add('on');
+  if(!reduce) setInterval(()=>{ if(performance.now()-lastUser>10000) setActive((active+1)%SERVICES.length,false); },3200);
+
+  let gl=false, renderer, scene, camera, root, spheres=[], ringA, ringB, sat, halo, dust, netG, nodes=[], crossL=[], haloTex, dotTex;
   try{
     if(!window.THREE) throw 0;
     const canvas=document.getElementById('gl');
@@ -610,7 +701,8 @@ p{margin:0}
     const gc=document.createElement('canvas');gc.width=gc.height=256;const g=gc.getContext('2d');
     const grd=g.createRadialGradient(128,128,0,128,128,128);grd.addColorStop(0,'rgba(124,92,240,.55)');grd.addColorStop(.45,'rgba(91,63,214,.18)');grd.addColorStop(1,'rgba(91,63,214,0)');
     g.fillStyle=grd;g.fillRect(0,0,256,256);
-    halo=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(gc),transparent:true,depthTest:false,depthWrite:false,blending:THREE.AdditiveBlending}));
+    haloTex=new THREE.CanvasTexture(gc);
+    halo=new THREE.Sprite(new THREE.SpriteMaterial({map:haloTex,transparent:true,depthTest:false,depthWrite:false,blending:THREE.AdditiveBlending}));
     halo.scale.set(7,7,1);halo.renderOrder=2;root.add(halo);
 
     // orbit rings (echo of the arc in the Zerith kit)
@@ -632,8 +724,35 @@ p{margin:0}
     const dc=document.createElement('canvas');dc.width=dc.height=64;const d=dc.getContext('2d');
     const dgr=d.createRadialGradient(32,32,0,32,32,32);dgr.addColorStop(0,'rgba(255,255,255,1)');dgr.addColorStop(.3,'rgba(183,165,255,.6)');dgr.addColorStop(1,'rgba(183,165,255,0)');
     d.fillStyle=dgr;d.fillRect(0,0,64,64);
-    dust=new THREE.Points(dg,new THREE.PointsMaterial({size:.09,map:new THREE.CanvasTexture(dc),transparent:true,opacity:.75,depthWrite:false,depthTest:false,blending:THREE.AdditiveBlending}));
+    dotTex=new THREE.CanvasTexture(dc);
+    dust=new THREE.Points(dg,new THREE.PointsMaterial({size:.09,map:dotTex,transparent:true,opacity:.75,depthWrite:false,depthTest:false,blending:THREE.AdditiveBlending}));
     dust.renderOrder=0;scene.add(dust);
+
+    // Zerith Core network: services on a flattened sphere around the mark, each wired to the core
+    netG=new THREE.Group(); scene.add(netG);
+    const NS=SERVICES.length, add=(o,ord)=>{o.renderOrder=ord;netG.add(o);return o;};
+    nodes=SERVICES.map((sv,i)=>{
+      // an orbit around the core, heights staggered so labels never stack
+      const th=i/NS*Math.PI*2+.3, hgt=[.45,-.3,.15,-.45,.35,-.1][i%6];
+      const p=new THREE.Vector3(Math.cos(th)*4.1,hgt,Math.sin(th)*4.1);
+      const col=new THREE.Color(sv.c);
+      const mesh=add(new THREE.Mesh(new THREE.SphereGeometry(.12,24,16),new THREE.MeshBasicMaterial({color:col,transparent:true,depthTest:false,depthWrite:false})),22);
+      mesh.position.copy(p);
+      const glowS=new THREE.Sprite(new THREE.SpriteMaterial({map:haloTex,color:col,transparent:true,depthTest:false,depthWrite:false,blending:THREE.AdditiveBlending}));
+      glowS.scale.set(1.3,1.3,1); mesh.add(glowS);
+      const mid=p.clone().multiplyScalar(.5).add(new THREE.Vector3(0,.55,0));
+      const curve=new THREE.QuadraticBezierCurve3(p.clone(),mid,new THREE.Vector3(0,0,0));
+      const line=add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(48)),new THREE.LineBasicMaterial({color:0xB7A5FF,transparent:true,opacity:0,depthTest:false})),4);
+      const pulse=add(new THREE.Sprite(new THREE.SpriteMaterial({map:dotTex,color:0xffffff,transparent:true,depthTest:false,depthWrite:false,blending:THREE.AdditiveBlending})),22);
+      pulse.scale.set(.32,.32,1);
+      return {p,mesh,glowS,line,curve,pulse,phase:i*.37%1,dir:i%2};
+    });
+    LINKS.forEach(([a,b])=>{
+      const A=nodes[a].p,B=nodes[b].p, mid=A.clone().add(B).multiplyScalar(.5); mid.multiplyScalar(1.18);
+      const c=new THREE.QuadraticBezierCurve3(A.clone(),mid,B.clone());
+      crossL.push(add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(c.getPoints(32)),new THREE.LineBasicMaterial({color:0x7C5CF0,transparent:true,opacity:0,depthTest:false})),3));
+    });
+    netG.visible=false;
   }
 
   function resize(){
@@ -679,6 +798,39 @@ p{margin:0}
       sat.material.opacity=cur.op*cur.rings;
       ringA.rotation.y=t*.25*idle;ringB.rotation.y=-t*.12*idle;
       const a=t*.6*idle; sat.position.set(Math.cos(a)*1.9,0,Math.sin(a)*1.9);
+      // network
+      const nv=clamp(cur.net||0);
+      netG.visible=nv>.01;
+      netl.classList.toggle('live',nv>.6);
+      if(netG.visible){
+        root.updateMatrixWorld(); camera.updateMatrixWorld();
+        netG.position.copy(root.position); netG.scale.setScalar(s*(mobile?.86:1)*(.35+.65*smooth(nv)));
+        netG.rotation.set((mobile?.62:.32)+py*.08,t*.06*idle+px*.35,0);
+        netG.updateMatrixWorld();
+        const inv=camera.matrixWorldInverse, coreZ=root.position.clone().applyMatrix4(inv).z;
+        const W=innerWidth,H=innerHeight;
+        nodes.forEach((n,i)=>{
+          const on=i===active, wp=n.p.clone().applyMatrix4(netG.matrixWorld);
+          const behind=wp.clone().applyMatrix4(inv).z<coreZ, f=behind?.5:1;
+          n.mesh.renderOrder=behind?5:22; n.pulse.renderOrder=behind?5:22;
+          n.mesh.material.opacity=nv*f; n.glowS.material.opacity=nv*f*(on?1:.55);
+          n.mesh.scale.setScalar(on?1.7:1);
+          n.line.material.opacity=nv*(on?.9:.26);
+          const u=(t*.32*(idle||0)+n.phase)%1;
+          n.pulse.position.copy(n.curve.getPoint(n.dir?u:1-u));
+          n.pulse.material.opacity=nv*Math.sin(u*Math.PI)*(on?1:.65);
+          const sp=wp.project(camera), X=(sp.x*.5+.5)*W, Y=(-sp.y*.5+.5)*H, lb=labels[i];
+          const lw=lb.offsetWidth||80, lx=Math.min(Math.max(X+12,8),W-lw-8);
+          lb.style.transform='translate3d('+lx.toFixed(1)+'px,'+(Y-14).toFixed(1)+'px,0)';
+          lb.style.opacity=(nv<.35?0:(nv-.35)/.65)*(behind?.55:1);
+          lb.style.zIndex=behind?1:2;
+        });
+        crossL.forEach(l=>l.material.opacity=nv*.18);
+        const cp=new THREE.Vector3(0,-.62,0).applyMatrix4(root.matrixWorld).project(camera);
+        const cw=coreLabel.offsetWidth||120;
+        coreLabel.style.transform='translate3d('+((cp.x*.5+.5)*W-cw/2).toFixed(1)+'px,'+((-cp.y*.5+.5)*H-16).toFixed(1)+'px,0)';
+        coreLabel.style.opacity=nv<.35?0:(nv-.35)/.65;
+      } else { labels.forEach(l=>l.style.opacity=0); coreLabel.style.opacity=0; }
       dust.rotation.y=t*.012*idle+px*.04; dust.rotation.x=py*.03;
       dust.position.y=scrollY*.0009;
       renderer.render(scene,camera);
